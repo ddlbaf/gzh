@@ -1,0 +1,1 @@
+define("pay/result",["libs/template"],function(t,e,a){var n=t("libs/template"),s={init:function(){$.Func.getUserInfo();var t={status:$.Func.getParam("status"),money:$.Func.getParam("money")},e=n("result-template",t);$("#result").html(e)}};a.exports=s});

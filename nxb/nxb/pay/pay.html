@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta content="" name="pgv" />
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../web/res/css/global.css">
+    <link rel="stylesheet" type="text/css" href="../web/res/css/pay/pay.css">
+<body class="pay">
+<div class="container">
+    <p class="tips" id="title"></p>
+    <div class="line border-bottom border-top flex">
+        <div class="line-lab">付费方式</div>
+        <div class="line-cnt flex-1">
+            <div class="tab-line flex flex-h-justify flex-h-vcenter" id="paymentList">
+                <!--<a class="tab-a on" href="javascript:;"><input name="" class="hide" type="radio"/>按月付费</a>-->
+                <!--<a class="tab-a" href="javascript:;"><input name="" class="hide" type="radio"/>按季付费</a>-->
+                <!--<a class="tab-a" href="javascript:;"><input name="" class="hide" type="radio"/>按年付费</a>-->
+            </div>
+        </div>
+    </div>
+    <div class="line border-bottom border-top flex" id="price">
+        <!--<div class="line-lab">价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格</div>-->
+        <!--<div class="line-cnt flex-1">-->
+            <!--<div class="price-line">-->
+                <!--<span class="price gray"><span class="line-though">1588</span>元/季</span>-->
+                <!--<span class="price"><span class="red">...</span>元/季</span>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="discount">8.8折</div>-->
+    </div>
+    <div class="line border-bottom border-top flex">
+        <div class="line-lab">支付方式</div>
+        <div class="line-cnt flex-1">
+            <div class="tab-line flex flex-h-vcenter">
+                <a class="tab-a on" href="javascript:;"><span class="ico-wxpay"></span>微信支付</a>
+            </div>
+        </div>
+    </div>
+    <div class="line border-bottom border-top flex">
+        <div class="line-lab">开通期限</div>
+        <div class="line-cnt flex-1">
+            <div class="tab-line flex flex-h-vcenter">
+                <a class="btn-reduce js-tap" data-handler="reducePeriod" href="javascript:;"><span></span></a><span class="number"><input readonly id="period" value="1" type="text" maxlength="3" pattern="[0-9]*"/></span><a class="btn-add js-tap" data-handler="addPeriod" href="javascript:;"><span></span></a>
+            </div>
+        </div>
+    </div>
+    <div class="line border-bottom border-top flex">
+        <div class="line-lab">应付金额</div>
+        <div class="line-cnt">
+            <span class="pay red">&yen;<span id="totalPrice">...</span>元</span>
+        </div>
+    </div>
+    <div class="btn-line" id="btnLine"><!--加载中加class "btnline-loading"-->
+        <p class="ajaxing-line">正在调起支付...</p>
+        <a class="btn btn-red js-tap" data-handler="payWX" href="javascript:;">确认支付</a>
+    </div>
+</div>
+
+<script id="payment-template" type="text/html">
+    {{each goods as good i}}
+        {{if i == 0}}
+        <a class="tab-a js-tap on" data-productid="{{ good.productid }}" data-handler="showPrice" data-number="{{ i }}" data-price="{{ good.actualprice }}" href="javascript:;">按{{ good.payment }}付费</a>
+        {{else}}
+        <a class="tab-a js-tap" data-productid="{{ good.productid }}" data-handler="showPrice" data-number="{{ i }}" data-price="{{ good.actualprice }}" href="javascript:;">按{{ good.payment }}付费</a>
+        {{/if}}
+    {{/each}}
+    <input type="hidden" id="productid" value="{{ goods[0].productid }}" name="productid"/>
+</script>
+
+<script id="price-template" type="text/html">
+    <div class="line-lab">价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格</div>
+    {{if pricepercent<1}}
+    <div class="line-cnt flex-1">
+        <div class="price-line">
+            <span class="price gray"><span class="line-though">{{ price.toFixed(2) }}</span>元/季</span>
+            <span class="price"><span class="red">{{ actualprice.toFixed(2) }}</span>元/季</span>
+        </div>
+    </div>
+    <div class="discount">{{ pricepercent.toFixed(2) }}折</div>
+    {{else}}
+    <div class="line-cnt flex-1">
+        <div class="price-line">
+            <span class="price"><span class="red">{{ actualprice.toFixed(2) }}</span>元/季</span>
+        </div>
+    </div>
+    {{/if}}
+</script>
+
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js "></script>
+<script type="text/javascript" src="../web/res/js/libs/zepto.min.js"></script>
+<script type="text/javascript" src="../web/res/js/libs/sea.js"></script>
+<script type="text/javascript">
+    seajs.config({
+        // Sea.js 的基础路径
+        base: '/gzh/nxb/web/res/js/',
+        alias: {
+            'global': 'global.js?20160630',
+            'pay': 'pay.js?20160630'
+        }
+    });
+    // 加载多个模块，在加载完成时，执行回调
+    seajs.use(['global', 'pay/pay'], function(global, pay) {
+        pay.init();
+    });
+</script>
+
+
+</body>
+</html>
