@@ -84,21 +84,6 @@ define(function(require, exports, module) {
                 $('#probability').html(html);
             })
         },
-        //板块股票
-        getIndustryStock: function(date){
-            var param = {
-                "jsonrpc": "2.0",
-                "method": "EagleEyes.IndustryStock",
-                "id": 54321,
-                "params" : {
-                    "blockid": 885734
-                }
-            };
-            $.Func.ajax(param, function(data){
-                var result = data.result;
-                console.log(result);
-            })
-        },
         //板块
         getBlock: function(){
             var param = {
@@ -110,7 +95,6 @@ define(function(require, exports, module) {
             };
             $.Func.ajax(param, function(res){
                 var result = res.result;
-                console.log(result);
                 if(result && result.bkdata){
                     result.colors = ['bg-blue', 'bg-pink', 'bg-yellow', 'bg-blue', 'bg-pink', 'bg-yellow'];
                     var html = template('block-template', result);
@@ -131,32 +115,24 @@ define(function(require, exports, module) {
                 //获取funid
                 that.getFundid(function(fundid){
                     var uin = $.User.userid;
-                    //判断是否在订阅列表
-                    Subscribe.subscribeList(uin, function(subscribeArr){
-                        if(~$.inArray(fundid, subscribeArr)){
+                    //判断是否在服务期内,在服务期内则正常展示
+                    Subscribe.vipService(uin, function(vipArr){
+                        if(~$.inArray(fundid, vipArr)){
                             that.getEye();
                             that.getBlock();
                             $('#subscribe').removeClass('hide');
                         }else{
                             $('#noSubscribe').removeClass('hide');
-                            //判断是否在服务期内
-                            Subscribe.vipService(uin, function(vipArr){
-                                if(~$.inArray(fundid, vipArr)){
-                                    $('#noSubscribe').removeClass('hide');
-                                    $('#nosubscribeBtn').html('<a class="btn" href="../../pay/pay.html?fundid=' + fundid + '"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
+                            //检测是否免费订阅
+                            Subscribe.checkFundFreeStatus(uin, fundid, function(status){
+                                if(1 == status){
+                                    $('#nosubscribeBtn').html('<a href="javascript:;" class="btn js-tap" data-fundid="' + fundid + '" data-handler="subscribe"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
                                 }else{
-                                    //检测是否免费订阅
-                                    Subscribe.checkFundFreeStatus(uin, fundid, function(status){
-                                        if(1 == status){
-                                            $('#nosubscribeBtn').html('<a href="javascript:;" class="btn js-tap" data-fundid="' + fundid + '" data-handler="subscribe"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
-                                        }else{
-                                            $('#nosubscribeBtn').html('<a class="btn" href="../../pay/pay.html?fundid=' + fundid + '"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
-                                        }
-                                    });
+                                    $('#nosubscribeBtn').html('<a class="btn" href="../../pay/pay.html?fundid=' + fundid + '"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
                                 }
-                            })
+                            });
                         }
-                    });
+                    })
                 })
             }
 

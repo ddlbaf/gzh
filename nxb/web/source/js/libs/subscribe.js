@@ -54,7 +54,7 @@ define(function(require, exports, module) {
                 if(result){
                     var data = result.data;
                     for(var obj in data){
-                        if(data[obj].status === 1){
+                        if(data[obj].status.toString() === '1'){
                             vipArr.push(data[obj].fundid);
                         }
                     }

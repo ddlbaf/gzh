@@ -36,19 +36,20 @@
 /**
  ** 详情页(detail.html)
  */
-.detail .list{font-size: 1.4rem;}
-.detail .list-li{padding: 0 1.5rem;-webkit-box-sizing: border-box;box-sizing: border-box;}
-.detail .stockname{float: left;width: 35%;}
-.detail .stockname-title{line-height: 2.2rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
-.detail .stockname-id{font-size: 1.1rem;}
+.blocklist .list{font-size: 1.4rem;}
+.blocklist .list-li{padding: 1.1rem 1.5rem 1.3rem;-webkit-box-sizing: border-box;box-sizing: border-box;background: #fff;}
+.blocklist .stockname{float: left;width: 35%;}
+.blocklist .stockname-title{line-height: 2.2rem;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+.blocklist .stockname-id{font-size: 1.1rem;}
 
-.detail .stockcap{float: left;width: 17%;}
-.detail .stockcap-curcap{font-size: 1.3rem;}
+.blocklist .stockcap{float: left;width: 20%;}
+.blocklist .stockcap-curmoney{line-height: 2.2rem;}
+.blocklist .stockcap-curcap{font-size: 1.3rem;}
 
-.detail .stockrole{float: left;width: 17%;text-align: center;}
-.detail .stockrole-box{display: inline-block;width: 4rem;height: 2rem;line-height:2rem;font-size:1.4rem;color: #fff;border-radius: 2px;}
+.blocklist .stockrole{float: left;width: 20%;text-align: center;padding-top: 0.7rem;}
+.blocklist .stockrole-box{display: inline-block;width: 4rem;height: 2rem;line-height:2rem;font-size:1.4rem;color: #fff;border-radius: 2px;}
 
-.detail .stockstatus{float: left;width: 21%;text-align: center;}
+.blocklist .stockstatus{float: left;width: 25%;text-align: right;line-height: 3.4rem;}
 
 
 

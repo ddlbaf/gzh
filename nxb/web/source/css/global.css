@@ -41,10 +41,12 @@ body{-webkit-user-select:none;-webkit-text-size-adjust:none;font-family:Helvetic
 .gray{color: #96989c!important;}
 .bg-pink{background: #e1007a!important;}
 .bg-blue{background: #5071ff!important;}
-.bg-lightblue{background: #06a3f6!important;}
 .bg-red{background: #ff4342!important;}
 .bg-yellow{background: #fdb21b!important;}
 .bg-green{background: #1bad0a!important;}
+.bg-lightblue{background: #06a3f6!important;}
+.bg-lightorange{background: #fd961c!important;}
+.bg-lightpink{background: #9f65c8!important;}
 
 /* 清除浮动 */
 .clearfix:after{content:".";clear:both;display:block;height:0;line-height:0;font-size:0;visibility:hidden;}

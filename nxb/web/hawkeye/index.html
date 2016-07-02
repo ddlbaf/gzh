@@ -117,9 +117,9 @@
 <script id="block-template" type="text/html">
     {{each bkdata as bk i}}
         {{if bk.blockid}}
-        <a href="javascript:;" data-blockid="{{ bk.blockid }}" class="plate-li {{ colors[i] }}">{{ bk.blockname }}</a>
+        <a href="blocklist.html?action=block&id={{ bk.blockid }}" class="plate-li {{ colors[i] }}">{{ bk.blockname }}</a>
         {{else}}
-        <a href="javascript:;" data-blockid="{{ bk.industryid }}" class="plate-li {{ colors[i] }}">{{ bkindustryname }}</a>
+        <a href="blocklist.html?action=industry&id={{ bk.Industryid }}" class="plate-li {{ colors[i] }}">{{ bk.industryname }}</a>
         {{/if}}
     {{/each}}
 </script>
@@ -133,7 +133,7 @@
         base: '/gzh/nxb/web/res/js/',
         alias: {
             'global': 'global.js?20160630',
-            'index': 'index.js?20160630'
+            'index': 'index.js?20160701'
         }
     });
     //加载多个模块，在加载完成时，执行回调
