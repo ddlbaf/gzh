@@ -110,7 +110,7 @@
                     <span class="gray">初始资金</span>{{ init_amount }}万元
                 </div>
             </div>
-            <canvas id="canvas_fan" width="640" height="520" style="width: 320px;height: 260px;">您的浏览器不支持canvas</canvas>
+            <div class="canvas"><canvas id="canvas_fan" width="640" height="600">您的浏览器不支持canvas</canvas></div>
             <div class="about-info2 flex">
                 <div class="flex-1"><span class="gray">&nbsp;总&nbsp;资&nbsp;产</span>{{ total_amount.toFixed(2) }}万元</div>
                 <div class="flex-1"><span class="gray">&nbsp;仓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位</span><span class="">{{ numToPercent(per) }}</span></div>

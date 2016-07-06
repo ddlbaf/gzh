@@ -74,7 +74,7 @@ define(function(require, exports, module) {
             period++;
             $('#period').val(period);
             totalPrice = Action.goods[0].actualprice * period;
-            $('#totalPrice').html(totalPrice);
+            $('#totalPrice').html(totalPrice.toFixed(2));
         },
         //根据选择的时间长度（年，季度，月）付费
         showPrice: function(){
@@ -84,7 +84,8 @@ define(function(require, exports, module) {
             $('#paymentList .js-tap').removeClass('on')
                 .eq(number).addClass('on');
             $('#productid').val(productid);
-            $('#totalPrice').html(Action.goods[number].actualprice * period);
+            totalPrice = Action.goods[number].actualprice * period;
+            $('#totalPrice').html(totalPrice.toFixed(2));
             var html = template('price-template', Action.goods[number]);
             $('#price').html(html);
         },
@@ -149,7 +150,7 @@ define(function(require, exports, module) {
                         },
                         function (res) {
                             if (res.err_msg == 'get_brand_wcpay_request:ok') {
-                                location.href = 'pay_result.html?status=1&money='+ totalPrice;
+                                location.href = 'pay_result.html?status=1&money='+ totalPrice.toFixed(2);
                             }else{
                                 //location.href = 'pay_result.html?status=0';
                             }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。

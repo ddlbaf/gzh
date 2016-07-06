@@ -17,6 +17,110 @@ define(function(require, exports, module) {
         return date[0] + '.' + date[1] + '.' + date[2];
     });
 
+    var Slider = function(id){
+        this.$ele = $(id);
+        this.$child = $('#bannerUl');
+        this.curSlide = 0;
+        this.timer = null;
+        this.width = $(window).width();
+        this.init();
+    };
+
+    Slider.prototype = {
+        init: function(){
+            this.getData();
+        },
+        getData: function(){
+            var that = this;
+            var param = {
+                "jsonrpc": "2.0",
+                "method": "Banner.Get",
+                "id": 54321,
+                "params" : {
+                }
+            };
+            $.Func.ajax(param, function(res){
+                var result = res.result;
+                if(result){
+                    that.render(result);
+                    that.bindEvent();
+                }
+            })
+        },
+        slide: function(){
+            var that = this;
+            if(!that.timer){
+                that.timer = setInterval(function(){
+                    that.next();
+                }, 5000);
+            }else{
+                clearInterval(that.timer);
+                that.timer = null;
+                setTimeout(function(){
+                    that.slide();
+                }, 5000);
+            }
+        },
+        render: function(result){
+            var data = result.data;
+            var html = template('banner-template', result);
+            var $li = '';
+            $('#bannerUl').html(html);
+
+            this.$child.css({
+                'width': this.width * this.$child.find('li').length + 'px'
+            });
+            this.$child.find('li').css({
+                'width': this.width + 'px'
+            });
+
+            $.each(data, function(i, t){
+                $li += '<li>&bull;</li>';
+            });
+            $('#bannerTab').html($li);
+
+            if(data && data.length>1){
+                this.slide();
+                this.bindEvent();
+            }
+
+        },
+        bindEvent: function(){
+            var that = this;
+            that.$ele.on('swipeleft', function(){
+                that.next.apply(that);
+            });
+            that.$ele.on('swiperight', function(){
+                that.prev.apply(that);
+            });
+        },
+        next: function(){
+            var $li = this.$child.find('li');
+
+            this.curSlide++;
+            if(this.curSlide >= $li.length) this.curSlide = 0;
+            this.slideTo(this.curSlide);
+            this.slide();
+        },
+        prev: function(){
+            var $li = this.$child.find('li');
+            this.curSlide--;
+            if(this.curSlide < 0) this.curSlide = $li.length-1;
+            this.slideTo(this.curSlide);
+            this.slide();
+        },
+        slideTo: function(index){
+            console.log(index);
+            var left = -index*this.width;
+            this.$child.css({
+                'margin-left': left+'px'
+            });
+            $('#bannerTab').removeClass('on').find('li').eq(index).addClass('on');
+        }
+    }
+
+
+
     var Action = {
         bindEvent : function(){
             $('body').delegate('.js-tap', 'click', function(e){
@@ -61,7 +165,7 @@ define(function(require, exports, module) {
         showBtn: function(fundid, index){
 
             if(!$.User.wxgzh){
-                $('#btn-'+index).html('<a class="btn btn-red" href="bindphone.html">绑定账号并购买</a>').removeClass('hide');
+                $('#btn-'+index).html('<a class="btn btn-red" href="bindphone.html">绑定账号并订阅</a>').removeClass('hide');
                 return false;
             }
 
@@ -215,6 +319,7 @@ define(function(require, exports, module) {
                 })
             });
 
+            var slider = new Slider('#banner');
             this.bindEvent();
 
         }

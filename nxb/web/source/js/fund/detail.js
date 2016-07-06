@@ -1,6 +1,6 @@
 define(function(require, exports, module) {
 
-    var Pie = require('libs/piechart');
+    var Pie = require('libs/pie');
     var template = require('libs/template');
 
     template.helper('numToPercent', function (number) {
@@ -58,23 +58,20 @@ define(function(require, exports, module) {
                 var result = data.result;
                 var per = 0;
                 var pieArray = [];
-                var colors = ['#2196F3', '#9B58B5', '#FF8806','#2196F3', '#9B58B5', '#FF8806','#2196F3', '#9B58B5', '#FF8806'];
 
                 //获取持仓各项比例,制作圆饼图
                 $.each(result.data, function(i, t){
                     per += t.percent;
                     pieArray.push({
-                        data: t.percent, //该项数值（必填）
+                        volume: t.volume, //该项数值（必填）
+                        percent: t.percent,
                         //ratio: t.percent,  //该项比例（可选，若不设置，则程序将通过data自行计算比例）
-                        fillStyle: colors[i], //该项扇形填充色（必填）
                         label: t.stockname //该项名称（可选）
                     });
 
-                })
+                });
                 pieArray.push({
-                    data: 1-per, //该项数值（必填）
-                    //ratio: t.percent,  //该项比例（可选，若不设置，则程序将通过data自行计算比例）
-                    fillStyle: '#FF8806', //该项扇形填充色（必填）
+                    percent: 1 - per, //该项数值（必填）
                     label: '现金' //该项名称（可选）
                 });
 
@@ -126,21 +123,9 @@ define(function(require, exports, module) {
         },
         renderPie: function(pieArray){
             new Pie({
-                selector: '#canvas_fan',  //canvas容器（可选，若不设置，则默认容器为 '#canvas'）
-                lineWidth: 1,  //文本指向线的宽度（可选，若不设置，则默认值为1）
-                autoline: 20,  //文本指向线的长度（可选，若不设置，则默认值为20）
-                radio: 0.50,  //设置文本中心位置（可选，若不设置，则默认值为0.60）
-                per: 0.90,  //设置比例至少为多少时在扇形里面显示文本（可选，若不设置，则默认值为0.10）
-                textAttr: {
-                    fontSize: 9,  //文本字号（可选，若不设置，则默认值为12）
-                    fontWeight: 'normal',  //文本是否加粗（可选，若不设置，则默认值为' normal'）
-                    fontFamily: 'Microsoft YaHei'  //文本字体（可选，若不设置，则默认值为 'Helvetica Neue'）
-                },
-                padding: 10,  //canvas内边距（可选，若不设置，则默认值为10）
-                radius: 80,  //半径（可选，若不设置，则程序将根据canvas尺寸和padding值自行计算半径）
-                animateEnble: true,  //是否开启360度动态画图（可选，若不设置，则默认值为 true）
-                type: 1  //1是点击放大效果，2是点击移动效果（可选，若不设置，则默认值为1）
-            }).draw(pieArray);
+                'selector': '#canvas_fan',
+                'data': pieArray
+            });
         },
         init : function(){
             var fundid = $.Func.getParam('fundid');
