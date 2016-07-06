@@ -95,9 +95,6 @@ define(function(require, exports, module) {
             }
 
         },
-        returnIndex: function(){
-            location.href = 'http://wx.gupiaoxianji.com/auth/indexcallback/';
-        },
         closeLayer: function(){
             $('#layer').removeClass('show');
         },

@@ -202,20 +202,24 @@ define(function(require, exports, module) {
             var eday = $.Func.formatDate(now);
             var sday = null;
             var createtime = $('#create-'+index).val();
+            var queryType = 0;
             createtime = $.Func.formatDate(createtime);
 
             switch (range){
                 case 'begin':
                     sday = createtime;
+                    queryType = 0;
                     break;
                 case 'year':
                     sday = $.Func.formatDate(now, 'year');
                     if(parseInt(sday) < parseInt(createtime)){
                         sday = createtime;
                     }
+                    queryType = 1;
                     break;
                 case 'month':
                     sday = $.Func.formatDate(now, 'mon');
+                    queryType = 2;
                     break;
             }
 
@@ -226,6 +230,7 @@ define(function(require, exports, module) {
                 "params" : {
                     "Fundid" : fundid,
                     "Pctchgtype" : 0,
+                    "QueryType": queryType,
                     "StartDay": parseInt(sday),
                     "EndDay": parseInt(eday)
                 }
