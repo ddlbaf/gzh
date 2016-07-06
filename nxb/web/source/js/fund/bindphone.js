@@ -109,7 +109,9 @@ define(function(require, exports, module) {
                         var result = res.result;
                         if(result){
                             $.Func.pop(result.statusmsg, function(){
+                                if(result.status == 1){
                                 location.href = 'http://wx.gupiaoxianji.com/auth/indexcallback/';
+                                }
                             });
                         }else{
                             $.Func.pop(res.error.message);
