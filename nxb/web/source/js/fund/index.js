@@ -34,16 +34,17 @@ define(function(require, exports, module) {
             var that = this;
             var param = {
                 "jsonrpc": "2.0",
-                "method": "Banner.Get",
+                "method": "Banner.GetWithSize",
                 "id": 54321,
-                "params" : {
+                "params": {
+                    "name":"fund",
+                    "size": "200"
                 }
             };
             $.Func.ajax(param, function(res){
                 var result = res.result;
                 if(result){
                     that.render(result);
-                    that.bindEvent();
                 }
             })
         },
@@ -96,7 +97,6 @@ define(function(require, exports, module) {
         },
         next: function(){
             var $li = this.$child.find('li');
-
             this.curSlide++;
             if(this.curSlide >= $li.length) this.curSlide = 0;
             this.slideTo(this.curSlide);
@@ -115,7 +115,7 @@ define(function(require, exports, module) {
             this.$child.css({
                 'margin-left': left+'px'
             });
-            $('#bannerTab').removeClass('on').find('li').eq(index).addClass('on');
+            $('#bannerTab').find('li').removeClass('on').eq(index).addClass('on');
         }
     }
 

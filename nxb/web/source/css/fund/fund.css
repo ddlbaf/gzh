@@ -1,10 +1,10 @@
 /* 基金首页(index.html)
 ------------------------------ */
 .index .banner{position: relative;width: 100%;overflow: hidden;}
-.index .banner-ul{-webkit-transition: all 1s;transition: all 1s;}
+.index .banner-ul{-webkit-transition: all 1s;transition: all 1s;width:2000px;}
 .index .banner-li{float: left;}
 .index .banner-tab{position: absolute;left: 50%;bottom: 0;z-index: 10;-webkit-transform: translateX(-50%);transform: translateX(-50%);}
-.index .banner-tab li{display:inline-block;color: rgba(255,255,255,0.8);font-size: 3rem;line-height: 2rem;}
+.index .banner-tab li{display:inline-block;color: rgba(255,255,255,0.5);font-size: 3rem;line-height: 2rem;}
 .index .banner-tab .on{color: rgba(255,255,255,1);}
 .index .li{margin-bottom: 1.5rem;background: #FFFFFF;}
 .index .li-hd{position: relative;padding: 1.6rem 1rem 1.6rem;}
