@@ -97,6 +97,15 @@
             </div>
         </div>
         <!--  持仓详情 ]]  -->
+
+
+
+        <div class="btn-line">
+
+            <a href="javascript:;" data-handler="pay" class="btn btn-red js-tap">续订</a>
+
+        </div>
+
     </div>
 
     <script id="info-template" type="text/html">
@@ -183,7 +192,9 @@
             base: '/gzh/nxb/web/res/js/',
             alias: {
                 'global': 'global.js?20160630',
-                'detail': 'detail.js?20160630'
+
+                'fund/detail': 'fund/detail.js?20160631'
+
             }
         });
         // 加载多个模块，在加载完成时，执行回调

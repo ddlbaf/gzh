@@ -100,6 +100,11 @@ define(function(require, exports, module) {
                 $('#operatingList').html(html);
             })
         },
+        //支付
+        pay: function(){
+            var fundid = Action.fundid;
+            location.href = '../../pay/pay.html?fundid=' + fundid;
+        },
         //渲染页面
         renderPage : function(fundid, per, pieArray){
             var that = this;
@@ -128,10 +133,12 @@ define(function(require, exports, module) {
             });
         },
         init : function(){
-            var fundid = $.Func.getParam('fundid');
-            this.holdingList(fundid);
-            this.operatingList(fundid);
-            //this.bindEvent();
+            this.fundid = $.Func.getParam('fundid');
+            if(this.fundid){
+                this.holdingList(this.fundid);
+                this.operatingList(this.fundid);
+                this.bindEvent();
+            }
         }
     }
 
