@@ -1,21 +1,58 @@
 define(function(require, exports, module) {
 
-    var template = require('libs/template');
+    var Template = require('libs/template');
+
+    Template.helper('fenToyuan', function (money) {
+        var amount = Math.ceil(money/100);
+        return amount;
+    });
+
+
+    Template.helper('dateFormate', function (createdate) {
+        return createdate.substring(0, 10);
+    });
+
+    Template.helper('arrayToString', function (arr) {
+        return arr.join(',');
+    });
+
+    var couponCache = {
+        iscroll: null,
+        curType: 1,
+        type1: {
+            data: null
+        },
+        type2: {
+            data: null
+        }
+    };
 
     //总价
     var totalPrice = 0;
     //商品信息
-    var goods= {};
+    var goodsCache = {
+        curNum: 0,
+        discount:0,
+        data: {}
+    };
     //支付签名
     var signCache = {};
 
     var Action = {
-        goods : {},
         bindEvent : function(){
             $('body').delegate('.js-tap', $.Func.TAP, function(e){
                 var handler = $(this).data('handler');
                 Action[handler] && Action[handler].call(this);
             })
+
+            window.onhashchange=function(){
+                var hashStr = location.hash.replace("#","");
+                if('coupon' == hashStr){
+                    $('body').addClass('showCounpons');
+                }else{
+                    $('body').removeClass('showCounpons');
+                }
+            }
         },
         modifyTitle: function(title){
             if(title){
@@ -43,54 +80,136 @@ define(function(require, exports, module) {
             $.Func.ajax(param, function(data){
                 var result = data.result;
                 if(result){
-                    var title = result.goods[0].productname + '信息服务';
+                    goodsCache = {
+                        curNum: 0,
+                        data: result.goods
+                    }
+
+                    var title = goodsCache.data[goodsCache.curNum].productname + '信息服务';
                     $('#title').html(title);
                     that.modifyTitle(title);
-                    $('#totalPrice').html(result.goods[0].actualprice);
-                    totalPrice = result.goods[0].actualprice;
-                    Action.goods = result.goods;
-                    var html = template('price-template', Action.goods[0]);
+                    $('#totalPrice').html(result.goods[goodsCache.curNum].actualprice);
+                    totalPrice = result.goods[goodsCache.curNum].actualprice;
+                    var html = Template('price-template', goodsCache.data[goodsCache.curNum]);
                     $('#price').html(html);
 
-                    html = template('payment-template', result);
+                    html = Template('payment-template', result);
                     $('#paymentList').html(html);
 
+                    that.checkCounpon();
                 }
             })
         },
         //减少数量
         reducePeriod: function(){
             var period = parseInt($('#period').val()) || 1;
+            var discount = parseInt(goodsCache.discount);
+
             if(period > 1){
                 period--;
                 $('#period').val(period);
-                totalPrice = Action.goods[0].actualprice * period;
-                $('#totalPrice').html(totalPrice.toFixed(2));
+                totalPrice = goodsCache.data[goodsCache.curNum].actualprice * period;
+                $('#totalPrice').html(totalPrice.toFixed(2) - discount);
             }
         },
         //添加数量
         addPeriod: function(){
             var period = parseInt($('#period').val()) || 1;
+            var discount = parseInt(goodsCache.discount);
+
             period++;
             $('#period').val(period);
-            totalPrice = Action.goods[0].actualprice * period;
-            $('#totalPrice').html(totalPrice.toFixed(2));
+            totalPrice = goodsCache.data[goodsCache.curNum].actualprice * period;
+            $('#totalPrice').html(totalPrice.toFixed(2) - discount);
         },
         //根据选择的时间长度（年，季度，月）付费
         showPrice: function(){
             var productid = $(this).data('productid');
             var number = $(this).data('number');
             var period = parseInt($('#period').val()) || 1;
+            goodsCache.curNum = number;
+            goodsCache.discount = 0;
+
+            //优惠券
+            Action.checkCounpon();
+
             $('#paymentList .js-tap').removeClass('on')
                 .eq(number).addClass('on');
             $('#productid').val(productid);
-            totalPrice = Action.goods[number].actualprice * period;
+            totalPrice = goodsCache.data[number].actualprice * period;
             $('#totalPrice').html(totalPrice.toFixed(2));
-            var html = template('price-template', Action.goods[number]);
+            var html = Template('price-template', goodsCache.data[number]);
             $('#price').html(html);
         },
+        //添加数量
+        showCoupons: function(){
+
+            var that = Action;
+
+            $.Func.getUserInfo();
+            if($.User.wxgzh){
+                //先定义iscroll
+                location.hash = 'coupon';
+                that.couponUserObtain(couponCache.curType, function(result){
+                    couponCache.type1.data = result.data;
+                    that.renderCoupon(result);
+                });
+            }
+        },
+        getCounpons: function(callback) {
+            var that = this;
+            $.Func.getUserInfo();
+            if($.User.wxgzh){
+                if(couponCache.type1.data){
+                    $.isFunction(callback) && callback(couponCache.type1.data);
+                }else{
+                    that.couponUserObtain(couponCache.curType, function(result){
+                        couponCache.type1.data = result.data;
+                        $.isFunction(callback) && callback(result.data);
+                    });
+                }
+            }
+        },
+        //查询有多少张优惠券可用
+        checkCounpon: function(){
+
+            var that = this;
+            var number = 0;
+            var productid = $('#productid').val();
+
+            that.getCounpons(function(data){
+                if(data){
+                    $.each(data, function(i, t){
+                        if(~$.inArray(productid, t.productsavailable)){
+                            number++;
+                        }
+                        if(i == data.length-1){
+                            $('#coupon').val(number);
+                            $('#couponLink').html(number + '张可用');
+                        }
+                    });
+                }
+            })
+        },
+
+        //使用优惠券
+        useCoupon: function(){
+            var couponid = $(this).data('couponid');
+            var productArr = $(this).data('productid').toString().split('.');
+            var prodcutid = goodsCache.data[goodsCache.curNum].productid.toString();
+            var amount = $(this).data('amount');
+            //判断优惠券是否有效
+            if(~$.inArray(prodcutid, productArr)){
+                goodsCache.discount = +amount;
+                $('#coupon').val(couponid);
+                $('#couponLink').html('优惠'+amount+'元');
+                location.hash = 'coupon';
+            }else{
+                $.Func.pop('这张优惠券不能用在当前产品上！');
+            }
+        },
         //创建订单
-        createOrder: function(productid, quantity, callback){
+        createOrder: function(productid, quantity, couponid, callback){
 
             var param = {
                 "jsonrpc": "2.0",
@@ -103,7 +222,7 @@ define(function(require, exports, module) {
                     "quantity": quantity,
                     "channelid":1,
                     "appenv":"weixin_gzh_nxb",
-                    "couponid":0
+                    "couponid":couponid
                 }
             };
             $.Func.ajax(param, function(data){
@@ -118,6 +237,7 @@ define(function(require, exports, module) {
             var productid = parseInt($('#productid').val());
             var quantity = parseInt($('#period').val()) || 1;
             var signType = productid.toString()+'-'+quantity.toString();
+            var couponid = parseInt($('#couponid').val()) || 1;
 
             if(!productid){
                 $.Func.pop('请选择产品支付');
@@ -128,7 +248,7 @@ define(function(require, exports, module) {
                 Action.onpay(signCache.signType);
             }else{
                 signCache[signType] =
-                Action.createOrder(productid, quantity, function(sign){
+                Action.createOrder(productid, quantity, couponid, function(sign){
                     signCache.signType = sign;
                     Action.onpay(sign);
                 });
@@ -171,10 +291,65 @@ define(function(require, exports, module) {
                 }
             });
         },
+        showTab: function(){
+            var that = Action;
+            var index = $(this).data('type') || 1;
+            couponCache.curType = index;
+
+            $(this).parent().children().removeClass('on');
+            $(this).addClass('on');
+            if(couponCache['type'+index].data){
+                that.renderCoupon(couponCache['type'+index]);
+            }else{
+                that.couponUserObtain(couponCache.curType, function(result){
+                    that.renderCoupon(result);
+                    couponCache['type'+index].data = result.data;
+
+                });
+            }
+        },
+        couponUserObtain: function(typeid, callback){
+            var that = this;
+            uin = $.User.userid;
+            var param = {
+                "jsonrpc": "2.0",
+                "method": "Coupon.CouponUserObtain",
+                "id": 54321,
+                "params" : {
+                    "userid": uin,
+                    "type": typeid
+                }
+            };
+            $.Func.ajax(param, function(res){
+                var result = res.result;
+                if(result){
+                    $.isFunction(callback) && callback(result);
+                }
+            })
+        },
+        renderCoupon: function(result){
+
+            if(!couponCache.iscroll){
+                couponCache.iscroll = new IScroll('#wrapper');
+            }
+
+            //判断是否空数据
+            if(result.data){
+                $('#wrapper').removeClass('show-empty');
+            }else{
+                $('#wrapper').addClass('show-empty');
+            }
+
+            var html = Template('li-template', result);
+            $('#couponList').html(html);
+            couponCache.iscroll.refresh();  //刷新数据
+        },
+        closeLayer: function () {
+            $(this).parent().parent().removeClass('show');
+        },
         init : function(){
             $.Func.getUserInfo();
             $.Func.getJSAPI();
-
             var fundid = $.Func.getParam('fundid');
             this.productInfo(fundid);
             this.bindEvent();

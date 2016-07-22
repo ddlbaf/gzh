@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta content="" name="pgv" />
+    <title>鹰眼板块详情</title>
+    <link rel="stylesheet" type="text/css" href="../source/css/global.css">
+    <link rel="stylesheet" type="text/css" href="../source/css/hawkeye/hawkeye.css">
+</head>
+<body class="detail">
+<div class="container">
+    <div class="list">
+        <ul class="list-ul">
+            <li class="list-li border-top clearfix">
+                <div class="stockname">
+                    <div class="stockname-title">海康威视威视威视</div>
+                    <div class="stockname-id gray">002415</div>
+                </div>
+                <div class="stockcap">
+                    <div class="stockcap-curmoney">35.16</div>
+                    <div class="stockcap-curcap red">+6.96%</div>
+                </div>
+                <div class="stockrole">
+                    <div class="stockrole-box bg-lightblue">强庄</div>
+                </div>
+                <div class="stockstatus">
+                    <div class="stockstatus-wrap">横盘吸筹</div>
+                </div>
+            </li>
+            <li class="list-li border-top clearfix">
+                <div class="stockname">
+                    <div class="stockname-title">海康威视威视威视</div>
+                    <div class="stockname-id gray">002415</div>
+                </div>
+                <div class="stockcap">
+                    <div class="stockcap-curmoney">35.16</div>
+                    <div class="stockcap-curcap red">+6.96%</div>
+                </div>
+                <div class="stockrole">
+                    <div class="stockrole-box bg-lightblue">强庄</div>
+                </div>
+                <div class="stockstatus">
+                    <div class="stockstatus-wrap">横盘吸筹</div>
+                </div>
+            </li>
+            <li class="list-li border-top clearfix">
+                <div class="stockname">
+                    <div class="stockname-title">海康威视威视威视</div>
+                    <div class="stockname-id gray">002415</div>
+                </div>
+                <div class="stockcap">
+                    <div class="stockcap-curmoney">35.16</div>
+                    <div class="stockcap-curcap red">+6.96%</div>
+                </div>
+                <div class="stockrole">
+                    <div class="stockrole-box bg-lightblue">强庄</div>
+                </div>
+                <div class="stockstatus">
+                    <div class="stockstatus-wrap">横盘吸筹</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<script id="li-template" type="text/html">
+
+</script>
+
+<script type="text/javascript" src="../res/js/libs/zepto.min.js"></script>
+<script type="text/javascript" src="../res/js/libs/sea.js"></script>
+<script type="text/javascript">
+    seajs.config({
+        // Sea.js 的基础路径
+        base: '/gzh/nxb/web/source/js/',
+        alias: {
+            'global': 'global.js?20160630',
+            'detail': 'detail.js?20160630'
+        }
+    });
+    //加载多个模块，在加载完成时，执行回调
+    seajs.use(['global', 'hawkeye/detail'], function(global, detail) {
+        detail.init();
+    });
+</script>
+</body>
+</html>
