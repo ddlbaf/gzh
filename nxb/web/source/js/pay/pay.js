@@ -237,7 +237,7 @@ define(function(require, exports, module) {
             var productid = parseInt($('#productid').val());
             var quantity = parseInt($('#period').val()) || 1;
             var signType = productid.toString()+'-'+quantity.toString();
-            var couponid = parseInt($('#couponid').val()) || 1;
+            var couponid = parseInt($('#couponid').val()) || 0;
 
             if(!productid){
                 $.Func.pop('请选择产品支付');
@@ -245,11 +245,10 @@ define(function(require, exports, module) {
             }
             $('#btnLine').addClass('btnline-loading');
             if(signCache.hasOwnProperty(signType)){
-                Action.onpay(signCache.signType);
+                Action.onpay(signCache[signType]);
             }else{
-                signCache[signType] =
                 Action.createOrder(productid, quantity, couponid, function(sign){
-                    signCache.signType = sign;
+                    signCache[signType] = sign;
                     Action.onpay(sign);
                 });
             }
