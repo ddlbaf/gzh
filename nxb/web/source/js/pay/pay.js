@@ -82,6 +82,7 @@ define(function(require, exports, module) {
                 if(result){
                     goodsCache = {
                         curNum: 0,
+                        discount:0,
                         data: result.goods
                     }
 
