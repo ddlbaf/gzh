@@ -186,7 +186,7 @@ define(function(require, exports, module) {
                                 if(1 == status){
                                     $('#btn-'+index).html('<a class="btn btn-red js-tap" data-fundid="' + fundid + '" data-handler="subscribe" href="javascript:;">免费订阅</a>').removeClass('hide');
                                 }else{
-                                    $('#btn-'+index).html('<a class="btn btn-red" href="../../pay/pay.html?fundid=' + fundid + '">购买</a>').removeClass('hide');
+                                    $('#btn-'+index).html('<a class="btn btn-red" href="../../pay/pay.html?productid=' + fundid + '">购买</a>').removeClass('hide');
                                 }
                             });
                         }

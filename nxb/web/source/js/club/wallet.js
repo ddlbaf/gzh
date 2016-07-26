@@ -26,7 +26,7 @@ define(function(require, exports, module) {
             if(!$.User.wxgzh){
                 $.Func.showLayer('#popBindAccount');
             }else{
-                location.href = '../../pay/pay.html?fundid=' + productid;
+                location.href = '../../pay/pay.html?productid=' + productid;
             }
         },
         //添加自选股
@@ -69,10 +69,14 @@ define(function(require, exports, module) {
                 var result = data.result;
 
                 if(result){
+                    var len = result.data.length || 0;
                     $('#date').html(result.date);
                     $('#recommend').html(result.data.length);
                     var html = template('li-template', result);
                     $('#stockList').html(html);
+                    if(len){
+                        $('#subscribe').addClass('show-empty');
+                    }
                 }
             })
         },
@@ -95,7 +99,7 @@ define(function(require, exports, module) {
                     }else{
                         $('#noSubscribe').removeClass('hide');
                     }
-                })
+                });
             }
 
             this.bindEvent();

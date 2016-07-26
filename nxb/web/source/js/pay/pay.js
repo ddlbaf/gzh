@@ -67,14 +67,14 @@ define(function(require, exports, module) {
             }
         },
         //持仓详情
-        productInfo: function(fundid){
+        productInfo: function(productid){
             var that = this;
             var param = {
                 "jsonrpc": "2.0",
                 "method": "Product.PriceDetail",
                 "id": 54321,
                 "params" : {
-                    "fundid": fundid
+                    "productclass": productid
                 }
             };
             $.Func.ajax(param, function(data){
@@ -87,10 +87,10 @@ define(function(require, exports, module) {
                     }
 
                     var title = goodsCache.data[goodsCache.curNum].productname + '信息服务';
+                    totalPrice = result.goods[goodsCache.curNum].actualprice;
                     that.modifyTitle(title);
                     $('#title').html(title);
-                    $('#totalPrice').html(result.goods[goodsCache.curNum].actualprice);
-                    totalPrice = result.goods[goodsCache.curNum].actualprice;
+                    $('#totalPrice').html(totalPrice.toFixed(2));
                     var html = Template('price-template', goodsCache.data[goodsCache.curNum]);
                     $('#price').html(html);
 
@@ -214,7 +214,7 @@ define(function(require, exports, module) {
 
             var param = {
                 "jsonrpc": "2.0",
-                "method": "Fund.CreateOrderGZH",
+                "method": "Product.CreateOrderGZH",
                 "id": 54321,
                 "params" : {
                     "userid": $.User.userid,
@@ -350,8 +350,8 @@ define(function(require, exports, module) {
         init : function(){
             $.Func.getUserInfo();
             $.Func.getJSAPI();
-            var fundid = $.Func.getParam('fundid');
-            this.productInfo(fundid);
+            var productid = $.Func.getParam('productid');
+            this.productInfo(productid);
             this.bindEvent();
 
         }

@@ -107,7 +107,7 @@ define(function(require, exports, module) {
                         if(result){
                             $.Func.pop(result.statusmsg, function(){
                                 if(result.status == 1){
-                                location.href = 'http://wx.gupiaoxianji.com/auth/indexcallback/';
+                                    location.href = $.CONFIG.INDEX;
                                 }
                             });
                         }else{

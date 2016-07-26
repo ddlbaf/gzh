@@ -6,10 +6,10 @@ define(function(require, exports, module) {
 
     //站点所有请求接口
     $.CONFIG = {
-        //ajaxUrl: 'http://app.api.gupiaoxianji.com/v3.5.3',
         WXAPI: 'http://wx.gupiaoxianji.com/gzh/nxb/sign/',               //微信jssdk
-        AJAX: 'http://app.api.gupiaoxianji.com/test',                    //ajax请求
-        CLUB: 'http://wx.gupiaoxianji.com/auth/indexcallbackclubtest/'   //会员
+        AJAX: 'http://wx.gupiaoxianji.com/wxh5api/',                    //ajax请求
+        CLUB: 'http://wx.gupiaoxianji.com/auth/indexcallbackclub/',  //会员
+        INDEX: 'http://wx.gupiaoxianji.com/auth/indexcallback/',  //默认跳转地址
     };
 
     $.Func = {

@@ -22,7 +22,7 @@ define(function(require, exports, module) {
         getFundid: function(callback){
             var param = {
                 "jsonrpc": "2.0",
-                "method": "EagleEyes.ToFundid",
+                "method": "EagleEyes.EagleEyesInfo",
                 "id": 54321
             };
             $.Func.ajax(param, function(res){
@@ -132,7 +132,7 @@ define(function(require, exports, module) {
                                 if(1 == status){
                                     $('#nosubscribeBtn').html('<a href="javascript:;" class="btn js-tap" data-fundid="' + fundid + '" data-handler="subscribe"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
                                 }else{
-                                    $('#nosubscribeBtn').html('<a class="btn" href="../../pay/pay.html?fundid=' + fundid + '"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
+                                    $('#nosubscribeBtn').html('<a class="btn" href="../../pay/pay.html?productid=' + fundid + '"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
                                 }
                             });
                         }

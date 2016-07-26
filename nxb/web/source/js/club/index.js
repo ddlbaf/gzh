@@ -33,15 +33,9 @@ define(function(require, exports, module) {
                 $.isFunction(callback) && callback(result);
             })
         },
-        init : function(){
+        //检查是否已经订阅
+        checkSubscribe: function (uin) {
             var that = this;
-            $.Func.getUserInfo();
-            var uin = $.User.userid;
-            if(!uin){
-                location.href = $.CONFIG.CLUB;
-            }
-            that.bindEvent();
-
             //查询订阅列表，看是否已经订阅
             Subscribe.vipService(uin, function(vipArr){
                 that.getClubList(function(list){
@@ -64,7 +58,16 @@ define(function(require, exports, module) {
                     $('#list').html(html);
                 });
             });
-
+        },
+        init : function(){
+            var that = this;
+            $.Func.getUserInfo();
+            var uin = $.User.userid;
+            if(!uin){
+                location.href = $.CONFIG.CLUB;
+            }
+            that.checkSubscribe(uin);
+            that.bindEvent();
         }
     };
 

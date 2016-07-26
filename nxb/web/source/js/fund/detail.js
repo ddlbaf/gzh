@@ -103,7 +103,7 @@ define(function(require, exports, module) {
         //支付
         pay: function(){
             var fundid = Action.fundid;
-            location.href = '../../pay/pay.html?fundid=' + fundid;
+            location.href = '../../pay/pay.html?productid=' + fundid;
         },
         //渲染页面
         renderPage : function(fundid, per, pieArray){
