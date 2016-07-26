@@ -42,7 +42,7 @@ define(function(require, exports, module) {
         vipService : function(uin, callback){
             var param = {
                 "jsonrpc": "2.0",
-                "method": "Fund.VIPService",
+                "method": "Product.VIPService",
                 "id": 54321,
                 "params" : {
                     "userid": uin

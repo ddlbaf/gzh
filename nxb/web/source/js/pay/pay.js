@@ -71,7 +71,7 @@ define(function(require, exports, module) {
             var that = this;
             var param = {
                 "jsonrpc": "2.0",
-                "method": "Fund.ProductInfo",
+                "method": "Product.PriceDetail",
                 "id": 54321,
                 "params" : {
                     "fundid": fundid
@@ -87,8 +87,8 @@ define(function(require, exports, module) {
                     }
 
                     var title = goodsCache.data[goodsCache.curNum].productname + '信息服务';
-                    $('#title').html(title);
                     that.modifyTitle(title);
+                    $('#title').html(title);
                     $('#totalPrice').html(result.goods[goodsCache.curNum].actualprice);
                     totalPrice = result.goods[goodsCache.curNum].actualprice;
                     var html = Template('price-template', goodsCache.data[goodsCache.curNum]);

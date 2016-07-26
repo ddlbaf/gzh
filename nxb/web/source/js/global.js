@@ -4,6 +4,14 @@ define(function(require, exports, module) {
 
     $.User = {};
 
+    //站点所有请求接口
+    $.CONFIG = {
+        //ajaxUrl: 'http://app.api.gupiaoxianji.com/v3.5.3',
+        WXAPI: 'http://wx.gupiaoxianji.com/gzh/nxb/sign/',               //微信jssdk
+        AJAX: 'http://app.api.gupiaoxianji.com/test',                    //ajax请求
+        CLUB: 'http://wx.gupiaoxianji.com/auth/indexcallbackclubtest/'   //会员
+    };
+
     $.Func = {
         TAP : 'ontouchstart' in window ? 'tap' : 'click',
         getParam : function(param){
@@ -17,7 +25,7 @@ define(function(require, exports, module) {
             }
         },
         ajax : function(param, fn){
-            var url = 'http://app.api.gupiaoxianji.com/v3.5.3';
+            var url = $.CONFIG.AJAX;
             $.ajax({
                 url: url,
                 type: "POST",
@@ -155,7 +163,7 @@ define(function(require, exports, module) {
         getJSAPI: function(){
             var url = location.href.split('#')[0];
             $.ajax({
-                url: 'http://wx.gupiaoxianji.com/gzh/nxb/sign/',
+                url: $.CONFIG.WXAPI,
                 contentType:"application/json",
                 data: JSON.stringify({
                     url: url

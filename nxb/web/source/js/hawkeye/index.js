@@ -31,6 +31,10 @@ define(function(require, exports, module) {
                 }
             })
         },
+        //关闭弹层
+        closeLayer : function(){
+            $(this).parent().parent().removeClass('show');
+        },
         //立即订阅鹰眼
         subscribe : function(){
             var fundid = $(this).data('fundid');
