@@ -27,19 +27,11 @@
 .index .on .arrow-down{-webkit-transform: rotate(180deg) translateY(50%);transform: rotate(180deg) translateY(50%);}
 .index .hawkeye{position: fixed;right:2.5rem;bottom:2.5rem;width: 4.2rem;height: 4.2rem;background: url("../../img/fund/index_hawkeye.png") no-repeat;background-size: 100%;box-shadow: 0 0 0 0.5rem #fac661, 0 0 0 1rem rgba(250,198,97, 0.5);border-radius: 4.7rem;z-index: 99;}
 
-.poplayer{display: none;position: fixed;left: 0;top: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.4);z-index: 99;}
-.poplayer .popmain{position:relative;width: 21rem;padding: 0 1.6rem;background: #fff;border-radius: 3px;}
-.poplayer .poplayer-close{right: -16px;top: -16px;}
-.poplayer .popdesc{font-size: 1.1rem;line-height: 2.8rem;}
-.poplayer.show{display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-pack:center;-webkit-box-align:center;}
 
 .poplayer-subscribe .popmain{padding: 7rem 1rem 1.8rem;text-align: center;}
 .poplayer-subscribe .popline{font-size: 2.3rem;line-height: 3.7rem;color: #f35833;}
 .poplayer-subscribe.show .popmain{background: #fff url("../../img/fund/poplayer_subscribe_title.png") no-repeat;background-size: 100% auto;}
 
-
-.poplayer-bindaccount .popmain{padding: 14rem 1.7rem 2.3rem;}
-.poplayer-bindaccount.show .popmain{background: #fff url("../../img/fund/poplayer_bindaccount.png") no-repeat;background-size: 100% auto;}
 
 
 /* 基金详情(detail.html)
@@ -122,14 +114,7 @@
 
 
 
-/* 支付结果页(pay_result.html)
+/* 绑定页(bindphone.html)
 ------------------------------ */
-.result .section{padding-top:1.5rem;text-align: center;}
-.result .ico-ok{height: 24.2rem;background: url("../../img/fund/pay_result_ok.png") center no-repeat;background-size: 24.3rem auto;}
-.result .ico-err{height: 24.2rem;background: url("../../img/fund/pay_result_err.png") center no-repeat;background-size: 24.3rem auto;}
-.result .title{font-size: 1.7rem;color: #202020;line-height: 2.8rem;}
-.result .desc{line-height:1.8rem;font-size: 1.3rem;color: #96989c;padding-bottom: 0.4rem;}
-.result .btn-line{padding: 2.1rem 3.5rem 0;}
-
 .bindphone .container{padding: 5rem 1rem;}
 .bindphone .btn-close{position: absolute;right: 0;top:0;width: 4rem;height: 4rem;background: url("../../img/global/ico_close_gray.png") center no-repeat;background-size: 2.2rem auto;}

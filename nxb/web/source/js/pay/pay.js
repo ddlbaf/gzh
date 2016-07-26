@@ -348,7 +348,6 @@ define(function(require, exports, module) {
             $(this).parent().parent().removeClass('show');
         },
         init : function(){
-            $.Func.getUserInfo();
             $.Func.getJSAPI();
             var productid = $.Func.getParam('productid');
             this.productInfo(productid);

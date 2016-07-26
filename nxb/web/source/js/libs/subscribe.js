@@ -55,7 +55,7 @@ define(function(require, exports, module) {
                     var data = result.data;
                     for(var obj in data){
                         if(data[obj].status.toString() === '1'){
-                            vipArr.push(data[obj].fundid);
+                            vipArr.push(data[obj].productclass);
                         }
                     }
                 }
@@ -63,14 +63,14 @@ define(function(require, exports, module) {
             })
         },
         //查询是否免费接口
-        checkFundFreeStatus : function(uin, fundid, callback){
+        checkFundFreeStatus : function(uin, productid, callback){
             var param = {
                 "jsonrpc": "2.0",
-                "method": "Fund.FundFreeStatus",
+                "method": "Product.ProductFreeStatus",
                 "id": 54321,
                 "params" : {
                     "userid": uin,
-                    "fundid": fundid
+                    "productclass": productid
                 }
             };
             $.Func.ajax(param, function(res){

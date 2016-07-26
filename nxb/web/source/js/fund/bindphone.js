@@ -100,25 +100,39 @@ define(function(require, exports, module) {
         },
         submit: function(){
             var phone = Action.checkPhone();
-            var smsCode = Action.checkSmsCode(phone, function(){
+            var target = $.Func.cookie.getCookie('gupiaoxianji_location');
+            var url;
+            switch (target){
+                case 'wallet':
+                    url = $.CONFIG.INDEX;
+                    break;
+                default:
+                    url = $.CONFIG.CLUB;
+                    break;
+            }
+            var smsCode = Action.checkSmsCode(phone, function(res){
+
+                if(!$.User.wxapp){
+                    $.Func.bindWeixin(phone, $.User.unionid, function(){});
+                }
+
                 if(!$.User.wxgzh){
                     $.Func.bindGZH(phone, $.User.openid, function(res){
                         var result = res.result;
                         if(result){
                             $.Func.pop(result.statusmsg, function(){
                                 if(result.status == 1){
-                                    location.href = $.CONFIG.INDEX;
+                                    location.href = url;
                                 }
                             });
                         }else{
                             $.Func.pop(res.error.message);
                         }
                     });
+                }else{
+                    location.href = url;
                 }
 
-                if(!$.User.wxapp){
-                    $.Func.bindWeixin(phone, $.User.unionid, function(){});
-                }
             });
 
         },

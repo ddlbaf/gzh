@@ -27,7 +27,7 @@
     <!--  未订阅 ]]  -->
 
     <!--  已经订阅 [[  -->
-    <div class="subscribe hide" id="subscribe">
+    <div class="subscribe hide" id="subscribe"> <!--如果没有数据，加class "show-empty"-->
         <h1 class="title border-bottom">尾盘捡钱包 <span id="date"></span></h1>
         <p class="recommend red border-bottom">今天策略推荐<span class="num" id="recommend">-</span>只</p>
         <p class="desc">每天14:30推送，次日早盘择时卖出(<span class="red">3%以上止盈</span> <span class="green">2%止损</span>)</p>
@@ -128,6 +128,7 @@
 
 
 <script type="text/javascript" src="../res/js/libs/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js "></script>
 <script type="text/javascript" src="../res/js/libs/sea.js"></script>
 <script type="text/javascript">
     seajs.config({
@@ -135,7 +136,7 @@
         base: '/gzh/nxb/web/res/js/',
         alias: {
             'global': 'global.js?20160630',
-            'club/wallet': 'club/wallet.js?20160630'
+            'club/wallet': 'club/wallet.js?20160701'
         }
     });
     // 加载多个模块，在加载完成时，执行回调

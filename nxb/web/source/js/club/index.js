@@ -66,6 +66,7 @@ define(function(require, exports, module) {
             if(!uin){
                 location.href = $.CONFIG.CLUB;
             }
+            $.Func.cookie.setCookie('gupiaoxianji_location', 'wallet');
             that.checkSubscribe(uin);
             that.bindEvent();
         }

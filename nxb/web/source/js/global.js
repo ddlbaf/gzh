@@ -161,6 +161,7 @@ define(function(require, exports, module) {
 
         },
         getJSAPI: function(){
+            var that = this;
             var url = location.href.split('#')[0];
             $.ajax({
                 url: $.CONFIG.WXAPI,
@@ -182,13 +183,69 @@ define(function(require, exports, module) {
                                 'onMenuShareTimeline',
                                 'onMenuShareAppMessage',
                                 'onMenuShareQQ',
+                                'onMenuShareQZone',
+                                'hideMenuItems',
                                 'chooseWXPay']  // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                         });
+
+                        that.share();
                     }
                 }
             });
+        },
+        //分享
+        share: function () {
+            var target = $.Func.cookie.getCookie('gupiaoxianji_location');
+            var url;
+            switch (target){
+                case 'wallet':
+                    url = $.CONFIG.CLUB;
+                    break;
+                default:
+                    url = $.CONFIG.INDEX;
+            }
+
+            var onSuccess = function() {
+            };
+
+            var onFail = function() {
+            };
+
+            var defaultOpt = {
+                link: url,
+                title: '股票先机',
+                desc: '大数据庄家分析神器',
+                imgUrl: 'http://wx.gupiaoxianji.com/gzh/nxbtestdev/web/res/img/global/logo.png',
+                success: onSuccess,
+                cancel: onFail
+            };
+
+            wx.ready(function(){
+                console.log(1);
+                // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+
+                //分享到朋友圈
+                wx.onMenuShareTimeline(defaultOpt);
+
+                //分享给朋友
+                wx.onMenuShareAppMessage(defaultOpt);
+
+                //分享到QQ
+                wx.onMenuShareQQ(defaultOpt);
+
+                //分享到QQ空间
+                wx.onMenuShareQZone(defaultOpt);
+
+                //隐藏按钮
+                wx.hideMenuItems({
+                    menuList: ['menuItem:copyUrl']
+                });
+
+            });
         }
     }
+
+    $.Func.getJSAPI();
 
 
 

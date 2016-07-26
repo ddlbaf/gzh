@@ -74,7 +74,7 @@ define(function(require, exports, module) {
                     $('#recommend').html(result.data.length);
                     var html = template('li-template', result);
                     $('#stockList').html(html);
-                    if(len){
+                    if(!len){
                         $('#subscribe').addClass('show-empty');
                     }
                 }

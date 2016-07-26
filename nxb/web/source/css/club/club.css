@@ -36,8 +36,9 @@
 
 .wallet .list-top{padding: 0 1rem;color: #96989c;}
 .wallet .list-top .stockname, .wallet .list-top .stockcap{line-height: 2.7rem;font-size: 0.9rem;}
-.wallet .info{line-height: 2rem;font-size: 1.2rem;color: #96989c;padding: 0 1rem;}
+.wallet .info{line-height: 2rem;font-size: 1.2rem;color: #96989c;padding: 0 1rem 1rem;}
 .wallet .info-title{font-size: 1.3rem;padding: 1.4rem 0 0;}
 
+.wallet .empty{display: none;}
 .wallet .show-empty .empty{text-align: center;font-size: 1.8rem;color: #96989c;padding: 14.3rem 0 3rem;background: url("../../img/club/wallet/wpjqb_icon_bk.png") center 4.5rem no-repeat;background-size: 8.5rem;}
 .wallet .show-empty .list{display: none;}

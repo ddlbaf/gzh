@@ -161,9 +161,9 @@ html,body,.container{height:100%;}
 
 
 .ico-phone, .ico-code, .ico-lock{position: absolute;left: 1.5rem;top: 50%;width: 2.1rem;height: 2.4rem;-webkit-transform: translateY(-50%);transform: translateY(-50%);}
-.ico-phone{background: url("../img/register/wx_icon_phone.png") no-repeat;background-size: auto 100%;}
-.ico-code{background: url("../img/register/wx_icon_code.png") no-repeat;background-size: auto 100%;}
-.ico-lock{background: url("../img/register/login_icon_lock.png") no-repeat;background-size: auto 100%;}
+.ico-phone{background: url("../img/global/wx_icon_phone.png") no-repeat;background-size: auto 100%;}
+.ico-code{background: url("../img/global/wx_icon_code.png") no-repeat;background-size: auto 100%;}
+.ico-lock{background: url("../img/global/login_icon_lock.png") no-repeat;background-size: auto 100%;}
 .form-line{position: relative;margin-bottom: 1.5rem;}
 .form-text{display:block;width: 100%;height: 4rem;font-size: 1.6rem;border: 1px solid #d7dce3;padding: 1rem 0.5rem 1rem 5rem;-webkit-box-sizing: border-box;box-sizing: border-box;border-radius: 3px;}
 .btn-sms{display: block;width: 11.8rem;height: 100%;line-height: 4rem;background: #5071ff;border-radius: 0 3px 3px 0;color: #fff;text-align: center;font-size: 1.5rem;}

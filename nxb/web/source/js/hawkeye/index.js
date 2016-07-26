@@ -116,23 +116,23 @@ define(function(require, exports, module) {
             if(!$.User.wxgzh){
                 $('#noSubscribe').removeClass('hide');
             }else{
-                //获取funid
-                that.getFundid(function(fundid){
+                //获取productid
+                that.getFundid(function(productid){
                     var uin = $.User.userid;
                     //判断是否在服务期内,在服务期内则正常展示
                     Subscribe.vipService(uin, function(vipArr){
-                        if(~$.inArray(fundid, vipArr)){
+                        if(~$.inArray(productid, vipArr)){
                             that.getEye();
                             that.getBlock();
                             $('#subscribe').removeClass('hide');
                         }else{
                             $('#noSubscribe').removeClass('hide');
                             //检测是否免费订阅
-                            Subscribe.checkFundFreeStatus(uin, fundid, function(status){
+                            Subscribe.checkFundFreeStatus(uin, productid, function(status){
                                 if(1 == status){
-                                    $('#nosubscribeBtn').html('<a href="javascript:;" class="btn js-tap" data-fundid="' + fundid + '" data-handler="subscribe"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
+                                    $('#nosubscribeBtn').html('<a href="javascript:;" class="btn js-tap" data-fundid="' + productid + '" data-handler="subscribe"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
                                 }else{
-                                    $('#nosubscribeBtn').html('<a class="btn" href="../../pay/pay.html?productid=' + fundid + '"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
+                                    $('#nosubscribeBtn').html('<a class="btn" href="../../pay/pay.html?productid=' + productid + '"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
                                 }
                             });
                         }
