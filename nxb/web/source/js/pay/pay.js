@@ -104,7 +104,7 @@ define(function(require, exports, module) {
         //减少数量
         reducePeriod: function(){
             var period = parseInt($('#period').val()) || 1;
-            var discount = parseInt(goodsCache.discount);
+            var discount = goodsCache.discount.toFixed(2);
 
             if(period > 1){
                 period--;
@@ -116,7 +116,7 @@ define(function(require, exports, module) {
         //添加数量
         addPeriod: function(){
             var period = parseInt($('#period').val()) || 1;
-            var discount = parseInt(goodsCache.discount);
+            var discount = goodsCache.discount.toFixed(2);
 
             period++;
             $('#period').val(period);
