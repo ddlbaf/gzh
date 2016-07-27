@@ -4,6 +4,7 @@
 .index .ico-eye, .index .ico-wallet{float: left; margin-left: -5.1rem;width: 4rem;height: 4rem;background-size: 100%;}
 .index .ico-eye{background-image: url("../../img/club/hy_icon_yybb.png");}
 .index .ico-wallet{background-image: url("../../img/club/hy_icon_wpjqb.png");}
+.index .list-li{position: relative;}
 .index .list-a{display: block; color: #202020;padding: 1.6rem 1rem 1.6rem 6.2rem;}
 .index .btn-s, .index .btn-red-s{display: inline-block;height: 1.8rem;font-size: 1.4rem;line-height: 1.8rem;text-align: center;vertical-align: top;border-radius: 3px;}
 .index .btn-s{border: 1px solid #ff4342;color: #ff4342;width: 5rem;}
@@ -11,6 +12,7 @@
 .index .title{font-size: 1.5rem;line-height: 2rem;}
 .index .desc{font-size: 1.3rem;color: #96989c;padding-top: 0.8rem;}
 .index .list-btn{text-align: right;}
+.index .list-detail{position: absolute;right: 0;top:0;width: 7rem;height: 6rem;z-index: 1;}
 
 /* 尾盘捡钱包(wallet.html)
 ------------------------------ */

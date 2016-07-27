@@ -27,7 +27,7 @@ define(function(require, exports, module) {
             };
             $.Func.ajax(param, function(res){
                 if(res.result){
-                    callback && callback(res.result.fundid);
+                    callback && callback(res.result.productclass);
                 }
             })
         },

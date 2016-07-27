@@ -36,13 +36,8 @@
 <script id="list-template" type="text/html">
 
     {{each data as da i}}
-    <li class="list-li border-bottom">
-        {{ if da.buystatus }}
-        <a href="{{ da.url }}" class="list-a">
-            {{ else }}
-            <a href="javascript:;" class="list-a">
-            {{ /if }}
-
+    <li class="list-li border-bottom {{ if !da.buystatus }}hide{{ /if }}">
+        <a href="../../pay/pay.html?productid={{ da.productclass }}" class="list-a">
             <div class="ico ico-eye" style="background-image: url({{ da.iconurl }})"></div>
             <div class="list-title flex flex-h-justify">
                 <div class="title">{{ da.productclassname}} {{ if da.pricedetail }}<span class="btn-red-s">&yen;{{ monPrice(da.pricedetail) }}</span>{{/if}}</div>
@@ -53,6 +48,7 @@
                 <div class="desc">{{ da.subscriptioncount }}人已订阅</div>
             </div>
         </a>
+        <a href="{{ da.url }}" class="list-detail"> </a>
     </li>
     {{/each}}
 
