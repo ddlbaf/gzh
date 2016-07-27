@@ -111,7 +111,12 @@
         {{ /if}}
     </div>
     <div class="line">
-        <span class="line-title">未来短期内大盘</span>{{ if flag>0 }}<span class="signal bg-red">上涨</span>{{ else}}<span class="signal bg-green">下跌</span>{{/if}}<span class="line-title1">概率</span><span class="per red">{{ numToPercent(probability) }}<span class="unit">%</span></span>
+        {{ if flag>0 }}
+        <span class="line-title">未来短期内大盘</span><span class="signal bg-red">上涨</span><span class="line-title1">概率</span><span class="per red">{{ numToPercent(probability) }}<span class="unit">%</span></span>
+        {{ else }}
+        <span class="line-title">未来短期内大盘</span><span class="signal bg-green">下跌</span><span class="line-title1">概率</span><span class="per green">{{ numToPercent(probability) }}<span class="unit">%</span></span>
+        {{ /if }}
+
     </div>
     <div class="line">
         <span class="line-title">操作建议</span><span class="signal {{ if signal == '强势' || signal == '弱势转强' }}bg-red{{ else }}bg-yellow{{ /if }}">{{ operate }}</span>
