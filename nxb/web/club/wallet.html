@@ -38,15 +38,7 @@
 
             <ul class="list-ul border-bottom" id="stockList">
 
-                <!--<li class="list-li list-top border-top clearfix">-->
 
-                    <!--<div class="stockname">股票</div>-->
-
-                    <!--<div class="stockcap">现价</div>-->
-
-                    <!--<div class="stockcap">涨幅</div>-->
-
-                <!--</li>-->
 
             </ul>
 
@@ -84,7 +76,15 @@
 <!--　　弹窗——未绑定账号　]]　-->
 
 <script id="li-template" type="text/html">
+    <li class="list-li list-top border-top clearfix">
 
+    <div class="stockname">股票</div>
+
+    <div class="stockcap">现价</div>
+
+    <div class="stockcap">涨幅</div>
+
+    </li>
     {{each data as stock i}}
     <li class="list-li border-top clearfix">
 
@@ -114,7 +114,7 @@
 
         <div class="stockrole">
 
-            <a href="javascript:;" class="stockrole-box bg-gray js-tap" data-handler="addStock">自选</a>
+            <a href="javascript:;" class="stockrole-box bg-gray js-tap hide" data-handler="addStock">自选</a>
 
         </div>
 
