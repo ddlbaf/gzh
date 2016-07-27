@@ -6,6 +6,7 @@ define(function(require, exports, module) {
 
     //站点所有请求接口
     $.CONFIG = {
+        BASE: 'http://wx.gupiaoxianji.com/gzh/nxb/',               //页面基本
         WXAPI: 'http://wx.gupiaoxianji.com/gzh/nxb/sign/',               //微信jssdk
         AJAX: 'http://wx.gupiaoxianji.com/wxh5api/',                    //ajax请求
         CLUB: 'http://wx.gupiaoxianji.com/auth/indexcallbackclub/',  //会员
@@ -196,14 +197,7 @@ define(function(require, exports, module) {
         //分享
         share: function () {
             var target = $.Func.cookie.getCookie('gupiaoxianji_location');
-            var url;
-            switch (target){
-                case 'wallet':
-                    url = $.CONFIG.CLUB;
-                    break;
-                default:
-                    url = $.CONFIG.INDEX;
-            }
+            var url, defaultOpt;
 
             var onSuccess = function() {
             };
@@ -211,14 +205,30 @@ define(function(require, exports, module) {
             var onFail = function() {
             };
 
-            var defaultOpt = {
-                link: url,
-                title: '股票先机',
-                desc: '大数据庄家分析神器',
-                imgUrl: 'http://wx.gupiaoxianji.com/gzh/nxbtestdev/web/res/img/global/logo.png',
-                success: onSuccess,
-                cancel: onFail
-            };
+            //设置基本分享信息
+            switch (target){
+                case 'wallet':
+                    url = $.CONFIG.CLUB;
+                    defaultOpt = {
+                        link: url,
+                        title: '股票先机-大数据庄家分析神器',
+                        desc: '这个很准！预测股市行情，捕捉庄家意图，埋伏优质个股~ ',
+                        imgUrl: 'http://wx.gupiaoxianji.com/gzh/nxbtestdev/web/res/img/global/logo.png',
+                        success: onSuccess,
+                        cancel: onFail
+                    };
+                    break;
+                default:
+                    url = $.CONFIG.INDEX;
+                    defaultOpt = {
+                        link: url,
+                        title: '股票先机-大数据庄家分析神器',
+                        desc: '【先机基金】免费体验，总收益率超60%了 ',
+                        imgUrl: 'http://wx.gupiaoxianji.com/gzh/nxbtestdev/web/res/img/global/logo.png',
+                        success: onSuccess,
+                        cancel: onFail
+                    };
+            }
 
             wx.ready(function(){
                 console.log(1);

@@ -9,17 +9,24 @@ define(function(require, exports, module) {
                 Action[handler] && Action[handler].call(this);
             });
         },
-        //支付完成跳转回去
+        //鏀粯瀹屾垚璺宠浆鍥炲幓
         back: function(){
-            var target = $.Func.cookie.getCookie('gupiaoxianji_location');
-            switch (target){
-                case 'wallet':
-                    location.href = $.CONFIG.CLUB;
+
+            var productid = $.Func.getParam('productid');
+            if(!productid) return;
+
+            switch (productid){
+                case 'yingyan':
+                    location.href = $.CONFIG.BASE + 'web/hawkeye/index.html';
+                    break;
+                case 'weipan':
+                    location.href = $.CONFIG.BASE + 'web/club/wallet.html';
                     break;
                 default:
-                    location.href = $.CONFIG.INDEX;
+                    location.href = $.CONFIG.BASE + 'web/fund/detail.html?fundid=' + productid;
                     break;
             }
+
         },
         init: function(){
             $.Func.getUserInfo();

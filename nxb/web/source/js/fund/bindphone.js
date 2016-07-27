@@ -95,6 +95,9 @@ define(function(require, exports, module) {
             }
 
         },
+        back: function(){
+            history.go(-1);
+        },
         closeLayer: function(){
             $('#layer').removeClass('show');
         },
@@ -104,10 +107,10 @@ define(function(require, exports, module) {
             var url;
             switch (target){
                 case 'wallet':
-                    url = $.CONFIG.INDEX;
+                    url = $.CONFIG.CLUB;
                     break;
                 default:
-                    url = $.CONFIG.CLUB;
+                    url = $.CONFIG.INDEX;
                     break;
             }
             var smsCode = Action.checkSmsCode(phone, function(res){

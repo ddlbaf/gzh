@@ -31,6 +31,7 @@ define(function(require, exports, module) {
     var totalPrice = 0;
     //商品信息
     var goodsCache = {
+        productclass: null,
         curNum: 0,
         discount:0,
         data: {}
@@ -43,7 +44,7 @@ define(function(require, exports, module) {
             $('body').delegate('.js-tap', $.Func.TAP, function(e){
                 var handler = $(this).data('handler');
                 Action[handler] && Action[handler].call(this);
-            })
+            });
 
             window.onhashchange=function(){
                 var hashStr = location.hash.replace("#","");
@@ -81,6 +82,7 @@ define(function(require, exports, module) {
                 var result = data.result;
                 if(result){
                     goodsCache = {
+                        productclass: productid,
                         curNum: 0,
                         discount:0,
                         data: result.goods
@@ -104,24 +106,24 @@ define(function(require, exports, module) {
         //减少数量
         reducePeriod: function(){
             var period = parseInt($('#period').val()) || 1;
-            var discount = goodsCache.discount.toFixed(2);
+            var discount = goodsCache.discount;
 
             if(period > 1){
                 period--;
                 $('#period').val(period);
                 totalPrice = goodsCache.data[goodsCache.curNum].actualprice * period;
-                $('#totalPrice').html(totalPrice.toFixed(2) - discount);
+                $('#totalPrice').html((totalPrice - discount).toFixed(2));
             }
         },
         //添加数量
         addPeriod: function(){
             var period = parseInt($('#period').val()) || 1;
-            var discount = goodsCache.discount.toFixed(2);
+            var discount = goodsCache.discount;
 
             period++;
             $('#period').val(period);
             totalPrice = goodsCache.data[goodsCache.curNum].actualprice * period;
-            $('#totalPrice').html(totalPrice.toFixed(2) - discount);
+            $('#totalPrice').html((totalPrice - discount).toFixed(2));
         },
         //根据选择的时间长度（年，季度，月）付费
         showPrice: function(){
@@ -269,8 +271,9 @@ define(function(require, exports, module) {
                             "paySign": sign.paySign //微信签名
                         },
                         function (res) {
+                            //支付成功
                             if (res.err_msg == 'get_brand_wcpay_request:ok') {
-                                location.href = 'pay_result.html?status=1&money='+ totalPrice.toFixed(2);
+                                location.href = 'pay_result.html?status=1&productid='+ goodsCache.productclass +'&money='+ totalPrice.toFixed(2);
                             }else{
                                 //location.href = 'pay_result.html?status=0';
                             }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。

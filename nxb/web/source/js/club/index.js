@@ -59,13 +59,19 @@ define(function(require, exports, module) {
                 });
             });
         },
+        //关闭弹层
+        closeLayer : function(){
+            $(this).parent().parent().removeClass('show');
+        },
         init : function(){
             var that = this;
             $.Func.getUserInfo();
-            var uin = $.User.userid;
-            if(!uin){
-                location.href = $.CONFIG.CLUB;
+            //判断登录态
+            if(!$.User.wxgzh){
+                $.Func.showLayer('#popBindAccount');
             }
+
+            var uin = $.User.userid;
             $.Func.cookie.setCookie('gupiaoxianji_location', 'wallet');
             that.checkSubscribe(uin);
             that.bindEvent();
