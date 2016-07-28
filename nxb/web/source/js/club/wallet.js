@@ -76,13 +76,14 @@ define(function(require, exports, module) {
                 var result = data.result;
 
                 if(result){
-                    var len = result.data.length || 0;
-                    var html = template('li-template', result);
-                    $('#date').html(that.formatDate(result.date.toString()));
-                    $('#recommend').html(result.data.length);
-                    $('#stockList').html(html);
+                    var len = result.data ? result.data.length : 0;
+                    $('#date').html(result.date);
+                    $('#recommend').html(len);
                     if(!len){
                         $('#subscribe').addClass('show-empty');
+                    }else{
+                        var html = template('li-template', result);
+                        $('#stockList').html(html);
                     }
                 }
             })

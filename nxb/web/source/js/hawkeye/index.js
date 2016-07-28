@@ -35,22 +35,6 @@ define(function(require, exports, module) {
         closeLayer : function(){
             $(this).parent().parent().removeClass('show');
         },
-        //立即订阅鹰眼
-        subscribe : function(){
-            var fundid = $(this).data('fundid');
-            if(!fundid) return false;
-            if(!$.User.wxgzh){
-                $.Func.showLayer('#popBindAccount');
-            }else{
-                Subscribe.subscribeFund($.User.userid, fundid, function(data){
-                    if(data.result.status == 1){
-                        $.Func.pop('订阅成功！');
-                    }else{
-                        $.Func.pop(data.result.status.msg);
-                    }
-                });
-            }
-        },
         //鹰眼播报
         getEye: function(){
             var that = this;
@@ -111,6 +95,7 @@ define(function(require, exports, module) {
         },
         init : function(){
             var that = this;
+
             //判断登录态
             $.Func.getUserInfo();
             if(!$.User.wxgzh){
@@ -127,14 +112,7 @@ define(function(require, exports, module) {
                             $('#subscribe').removeClass('hide');
                         }else{
                             $('#noSubscribe').removeClass('hide');
-                            //检测是否免费订阅
-                            Subscribe.checkFundFreeStatus(uin, productid, function(status){
-                                if(1 == status){
-                                    $('#nosubscribeBtn').html('<a href="javascript:;" class="btn js-tap" data-fundid="' + productid + '" data-handler="subscribe"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
-                                }else{
-                                    $('#nosubscribeBtn').html('<a class="btn" href="../../pay/pay.html?productid=' + productid + '"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
-                                }
-                            });
+                            $('#nosubscribeBtn').html('<a class="btn" href="../../pay/pay.html?productid=' + productid + '"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
                         }
                     })
                 })
