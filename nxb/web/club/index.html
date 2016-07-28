@@ -45,7 +45,9 @@
             </div>
             <div class="list-btn flex flex-h-justify">
                 <div class="desc">{{ da.productclassdesc }}</div>
+                {{ if da.productclass != 'guxiban'}}
                 <div class="desc">{{ da.subscriptioncount }}人已订阅</div>
+                {{/if}}
             </div>
         </a>
         {{ if da.productclass != 'guxiban'}}
