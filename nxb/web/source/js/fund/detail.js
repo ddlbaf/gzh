@@ -139,7 +139,7 @@ define(function(require, exports, module) {
                 location.href = $.CONFIG.INDEX;
             }
 
-            this.fundid = $.Func.getParam('fundid');
+            this.fundid = $.Func.getParam('fundid').trim();
             if(this.fundid){
                 this.holdingList(this.fundid);
                 this.operatingList(this.fundid);

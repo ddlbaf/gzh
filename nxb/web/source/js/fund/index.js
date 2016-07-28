@@ -110,7 +110,6 @@ define(function(require, exports, module) {
             this.slide();
         },
         slideTo: function(index){
-            console.log(index);
             var left = -index*this.width;
             this.$child.css({
                 'margin-left': left+'px'
@@ -244,16 +243,20 @@ define(function(require, exports, module) {
         },
         //订阅
         subscribe : function(){
-            var fundid = $(this).data('fundid');
+            var fundid = $(this).data('fundid').trim();
             if(!fundid) return false;
             if(!$.User.wxgzh){
                 $.Func.showLayer('#popBindAccount');
             }else{
                 Subscribe.subscribeFund($.User.userid, fundid, function(data){
                     if(data.result.status == 1){
-                        $.Func.pop('订阅成功！');
+                        $.Func.pop('订阅成功！', function(){
+                            setTimeout(function(){
+                                location.href = $.CONFIG.BASE + 'web/fund/detail.html?fundid=' + fundid;
+                            }, 500);
+                        });
                     }else{
-                        $.Func.pop(data.result.status.msg);
+                        location.href = $.CONFIG.BASE + 'pay/pay.html?productid=' + fundid;
                     }
                 });
             }
