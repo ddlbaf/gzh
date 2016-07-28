@@ -127,7 +127,7 @@ define(function(require, exports, module) {
         },
         //根据选择的时间长度（年，季度，月）付费
         showPrice: function(){
-            var productid = $(this).data('productid');
+            var productid = $(this).data('productid').trim();
             var number = $(this).data('number');
             var period = parseInt($('#period').val()) || 1;
             goodsCache.curNum = number;
@@ -350,11 +350,22 @@ define(function(require, exports, module) {
         closeLayer: function () {
             $(this).parent().parent().removeClass('show');
         },
+        filter: function(s){
+            var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）&mdash;—|{}【】‘；：”“'。，、？]")
+            var rs = "";
+            for (var i = 0; i < s.length; i++) {
+                rs = rs + s.substr(i, 1).replace(pattern, '');
+            }
+            return rs;
+        },
         init : function(){
             $.Func.getJSAPI();
             var productid = $.Func.getParam('productid');
-            this.productInfo(productid);
-            this.bindEvent();
+            if(productid){
+                productid = this.filter(productid);
+                this.productInfo(productid);
+                this.bindEvent();
+            }
 
         }
     }
