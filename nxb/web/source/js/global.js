@@ -10,7 +10,7 @@ define(function(require, exports, module) {
         WXAPI: 'http://wx.gupiaoxianji.com/gzh/nxb/sign/',               //微信jssdk
         AJAX: 'http://wx.gupiaoxianji.com/wxh5api/',                    //ajax请求
         CLUB: 'http://wx.gupiaoxianji.com/auth/indexcallbackclub/',  //会员
-        INDEX: 'http://wx.gupiaoxianji.com/auth/indexcallback/',  //默认跳转地址
+        INDEX: 'http://wx.gupiaoxianji.com/auth/indexcallbackfund/',  //默认跳转地址
     };
 
     $.Func = {

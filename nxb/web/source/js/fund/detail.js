@@ -133,6 +133,12 @@ define(function(require, exports, module) {
             });
         },
         init : function(){
+            //判断登录态
+            $.Func.getUserInfo();
+            if(!$.User.wxgzh){
+                location.href = $.CONFIG.INDEX;
+            }
+
             this.fundid = $.Func.getParam('fundid');
             if(this.fundid){
                 this.holdingList(this.fundid);

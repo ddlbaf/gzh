@@ -94,6 +94,12 @@ define(function(require, exports, module) {
             })
         },
         init : function(){
+            //判断登录态
+            $.Func.getUserInfo();
+            if(!$.User.wxgzh){
+                location.href = $.CONFIG.INDEX;
+            }
+
             var fundid = $.Func.getParam('fundid');
             if(fundid){
                 this.getData(fundid);
