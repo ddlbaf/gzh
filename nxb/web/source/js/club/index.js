@@ -47,6 +47,9 @@ define(function(require, exports, module) {
                             case 'weipan':
                                 list.data[i].url = 'wallet.html';
                                 break;
+                            case 'guxiban':
+                                list.data[i].url = 'http://m.qlchat.com/live/530000013017993.htm';
+                                break;
                         }
                         if(~$.inArray(t.productclass, vipArr)){
                             list.data[i].status = 0;

@@ -55,6 +55,13 @@ define(function(require, exports, module) {
         closeLayer : function(){
             $(this).parent().parent().removeClass('show');
         },
+        formatDate: function (olddate) {
+            var newdate = '';
+            if(olddate){
+                newdate = olddate.substring(0,4) + '年' + olddate.substring(4, 6) + '月' + olddate.substring(6) + '日';
+            }
+            return newdate;
+        },
         //尾盘详情
         getWeipan: function(){
             var that = this;
@@ -70,9 +77,9 @@ define(function(require, exports, module) {
 
                 if(result){
                     var len = result.data.length || 0;
-                    $('#date').html(result.date);
-                    $('#recommend').html(result.data.length);
                     var html = template('li-template', result);
+                    $('#date').html(that.formatDate(result.date.toString()));
+                    $('#recommend').html(result.data.length);
                     $('#stockList').html(html);
                     if(!len){
                         $('#subscribe').addClass('show-empty');
