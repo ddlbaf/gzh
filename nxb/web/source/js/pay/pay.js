@@ -127,7 +127,7 @@ define(function(require, exports, module) {
         },
         //根据选择的时间长度（年，季度，月）付费
         showPrice: function(){
-            var productid = $(this).data('productid').trim();
+            var productid = $(this).data('productid');
             var number = $(this).data('number');
             var period = parseInt($('#period').val()) || 1;
             goodsCache.curNum = number;
