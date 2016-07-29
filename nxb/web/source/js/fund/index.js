@@ -9,7 +9,10 @@ define(function(require, exports, module) {
     var status = {};
 
     template.helper('numToPercent', function (number) {
-        return (number*100).toFixed(2) + '%'
+        var re = '([0-9]+)\.([0-9]{2})[0-9]*';
+        number = (number*100).toFixed(2).toString();
+        newNumber = number.match(re);
+        return newNumber[1] + '.<span class="float">' + newNumber[2] + '%</span>';
     });
 
     template.helper('dateFormate', function (createdate) {

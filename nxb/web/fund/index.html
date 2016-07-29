@@ -105,13 +105,38 @@
         {{each data as fund i}}
         <li class="li border-bottom border-top">
             <a href="javascript:;" class="li-hd flex js-tap" data-handler="showMore" data-index="{{ i }}" data-fundid="{{ fund.fundid }}">
-                <div class="li-item flex-1">
-                    <div class="li-title">{{  fund.fund_name  }}</div>
-                    <div class="li-desc">创建于{{ dateFormate(fund.createDate) }}</div>
+
+                <div class="li-item li-item0 flex-1">
+
+                    {{ if fund.pctchg>0 }}
+                    <div class="li-title">收益率<span class="red">{{ # numToPercent(fund.pctchg) }}</span></div>
+                    {{ else if fund.pctchg<0 }}
+                    <div class="li-title">收益率<span class="green">-{{ # numToPercent(fund.pctchg) }}</span></div>
+                    {{ else }}
+                    <div class="li-title">收益率<span class="gray">{{ # numToPercent(fund.pctchg) }}</span></div>
+                    {{ /if }}
+
+                    {{ if fund.compare_item.pctchg>0 }}
+                    <div class="li-desc">同期上证指数<span class="red">{{ # numToPercent(fund.compare_item.pctchg) }}</span></div>
+                    {{ else if fund.compare_item.pctchg<0 }}
+                    <div class="li-desc">同期上证指数<span class="green">-{{ # numToPercent(fund.compare_item.pctchg) }}</span></div>
+                    {{ else }}
+                    <div class="li-desc">同期上证指数<span class="gray">{{ # numToPercent(fund.compare_item.pctchg) }}</span></div>
+                    {{ /if }}
+
                 </div>
-                <div class="li-item flex-1">
-                    <div class="li-title">收益率<span class="{{ if fund.pctchg>0 }}red{{else if fund.pctchg<0}}green{{else}}gray{{/if}}">{{ numToPercent(fund.pctchg) }}</span></div>
-                    <div class="li-desc">同期上证指数<span class="{{ if fund.compare_item.pctchg>0 }}red{{else if fund.compare_item.pctchg<0}}green{{else}}gray{{/if}}">{{ numToPercent(fund.compare_item.pctchg) }}</span></div>
+
+                <div class="li-item li-item1 flex-1">
+
+                    <div class="li-title">{{  fund.fund_name  }}</div>
+                    <div class="li-tips">
+                        <span class="tips bg-red">{{ fund.tags[0] }}</span>
+                        {{ if fund.tags[1] }}
+                        <span class="tips bg-yellow">{{ fund.tags[1] }}</span>
+                        {{ /if}}
+                    </div>
+                    <div class="li-desc">创建于{{ dateFormate(fund.createDate) }}</div>
+
                 </div>
                 <div class="arrow-down"></div>
             </a>

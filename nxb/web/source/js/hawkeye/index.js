@@ -84,25 +84,35 @@ define(function(require, exports, module) {
             $.Func.ajax(param, function(res){
                 var result = res.result;
                 if(result && result.bkdata){
-                    result.colors = ['bg-blue', 'bg-pink', 'bg-yellow', 'bg-blue', 'bg-pink', 'bg-yellow'];
+                    result.colors = ['block-color1', 'block-color2', 'block-color3', 'block-color4', 'block-color5', 'block-color6', 'block-color7', 'block-color8', 'block-color9', 'block-color10'];
                     var html = template('block-template', result);
                     $('#block').html(html);
                 }else{
-                    var html = '<li class="empty-li">暂无</li>';
+                    var html = '<li class="empty-li">暂无板块推荐</li>';
                     $('#block').html(html);
                 }
             })
+        },
+        //展示鹰眼介绍页
+        showSubscribe: function (productid) {
+            $('#noSubscribe').removeClass('hide');
+            $('#noSubscribe img').each(function (i, t) {
+                var src = $(t).data('src');
+                $(t).attr('src', src);
+            })
+            $('#nosubscribeBtn').html('<a href="../../pay/pay.html?productid=' + productid + '"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
         },
         init : function(){
             var that = this;
 
             //判断登录态
             $.Func.getUserInfo();
-            if(!$.User.wxgzh){
-                $('#noSubscribe').removeClass('hide');
-            }else{
-                //获取productid
-                that.getFundid(function(productid){
+
+            //获取productid
+            that.getFundid(function(productid){
+                if(!$.User.wxgzh){
+                    that.showSubscribe(productid);
+                }else{
                     var uin = $.User.userid;
                     //判断是否在服务期内,在服务期内则正常展示
                     Subscribe.vipService(uin, function(vipArr){
@@ -111,12 +121,12 @@ define(function(require, exports, module) {
                             that.getBlock();
                             $('#subscribe').removeClass('hide');
                         }else{
-                            $('#noSubscribe').removeClass('hide');
-                            $('#nosubscribeBtn').html('<a class="btn" href="../../pay/pay.html?productid=' + productid + '"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
+                            that.showSubscribe(productid);
                         }
                     })
-                })
-            }
+                }
+
+            })
 
             this.bindEvent();
         }

@@ -1,18 +1,24 @@
 /* 基金首页(index.html)
 ------------------------------ */
 .index .banner{position: relative;width: 100%;overflow: hidden;}
-.index .banner-ul{-webkit-transition: all 1s;transition: all 1s;width:2000px;}
+.index .banner-ul{-webkit-transition: all 1s;transition: all 1s;width:500%;}
 .index .banner-li{float: left;}
 .index .banner-tab{position: absolute;left: 50%;bottom: 0;z-index: 10;-webkit-transform: translateX(-50%);transform: translateX(-50%);}
 .index .banner-tab li{display:inline-block;color: rgba(255,255,255,0.5);font-size: 3rem;line-height: 2rem;}
 .index .banner-tab .on{color: rgba(255,255,255,1);}
 .index .li{margin-bottom: 1.5rem;background: #FFFFFF;}
-.index .li-hd{position: relative;padding: 1.6rem 1rem 1.6rem;}
-.index .li-title{font-size: 1.3rem;line-height: 2rem;color: #202020;}
-.index .li-desc{font-size: 1.1rem;line-height: 1.6rem;color: #96989c;}
-.index .li .arrow-down{position: absolute;right: 1rem;top: 50%;-webkit-transform: translateY(-50%);transform: translateY(-50%);}
+.index .li-hd{position: relative;padding: 1.5rem 1rem 1.6rem;}
+.index .li-hd:after{content:'';position:absolute;top:1.8rem;bottom:1.8rem;border-left:1px solid #c8c7cc;left:45%;width:0;-webkit-transform:scaleX(.5);-webkit-transform-origin:0 0;z-index:2;}
+.index .li-title{font-size: 1.2rem;line-height: 2rem;color: #96989c;}
+.index .li-desc{font-size: 1.2rem;line-height: 1.6rem;color: #96989c;}
+.index .li .arrow-down{position: absolute;right: 1rem;top: 2rem;width:1.9rem;height:1.9rem;}
 .index .li .red, .index .li .green, .index .li .gray{padding-left: 0.6rem;}
-.index .li-title .red, .index .li-title .green{font-size: 1.9rem;}
+.index .li-title .red, .index .li-title .green{font-size: 2.9rem;}
+.index .li-title .float{font-size: 1.7rem;}
+.index .li-item0 .li-title{padding: 1rem 0 1rem;}
+.index .li-item1 .li-title{font-size: 1.4rem;color: #202020;padding-bottom: 0.1rem;}
+.index .li-tips{height: 1.8rem;line-height: 1.8rem;padding-bottom: 0.6rem;}
+.index .li-tips .tips{display: inline-block;color: #fff;font-size: 1.2rem;padding: 0 0.8rem;border-radius: 0.9rem;}
 .index .li-bd{display:none;overflow: hidden;}
 .index .li-bd .tab{padding-bottom: 1.3rem;}
 .index .li-bd .tab-a{position:relative;display: inline-block;width: 3.8rem;text-align: center;height: 1.8rem;line-height:1.8rem;background: #fff;color: #a6aabd;}
@@ -24,7 +30,7 @@
 .index .li-bd .p{background: #f0f4fa;color: #747bba;line-height: 1.8rem;font-size: 1.1rem;padding: 0.7rem 1.2rem;}
 .index .btn-line{padding-top: 2rem;}
 .index .on .li-bd{display: block;padding: 1.9rem 1rem;}
-.index .on .arrow-down{-webkit-transform: rotate(180deg) translateY(50%);transform: rotate(180deg) translateY(50%);}
+.index .on .arrow-down{-webkit-transform: rotate(180deg);transform: rotate(180deg);}
 .index .hawkeye{position: fixed;right:2.5rem;bottom:2.5rem;width: 4.2rem;height: 4.2rem;background: url("../../img/fund/index_hawkeye.png") no-repeat;background-size: 100%;box-shadow: 0 0 0 0.5rem #fac661, 0 0 0 1rem rgba(250,198,97, 0.5);border-radius: 4.7rem;z-index: 99;}
 
 
