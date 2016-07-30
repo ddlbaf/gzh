@@ -88,12 +88,20 @@ define(function(require, exports, module) {
                 }
             })
         },
+        //展示钱包介绍页
+        showSubscribe: function (productid) {
+            $('#noSubscribe').removeClass('hide');
+            $('#noSubscribe img').each(function (i, t) {
+                var src = $(t).data('src');
+                $(t).attr('src', src);
+            });
+        },
         init : function(){
             var that = this;
             //判断登录态
             $.Func.getUserInfo();
             if(!$.User.wxgzh){
-                $('#noSubscribe').removeClass('hide');
+                that.showSubscribe();
             }else{
                 //获取funid
                 var uin = $.User.userid;
@@ -105,7 +113,7 @@ define(function(require, exports, module) {
                         that.getWeipan();
                         $('#subscribe').removeClass('hide');
                     }else{
-                        $('#noSubscribe').removeClass('hide');
+                        that.showSubscribe();
                     }
                 });
             }

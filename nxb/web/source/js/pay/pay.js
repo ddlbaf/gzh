@@ -251,14 +251,20 @@ define(function(require, exports, module) {
                 Action.onpay(signCache[signType]);
             }else{
                 Action.createOrder(productid, quantity, couponid, function(sign){
-                    signCache[signType] = sign;
-                    Action.onpay(sign);
+
+                    if(1 == sign.status){       //下单成功
+                        signCache[signType] = sign;
+                        Action.onpay(sign);     //下单失败
+                    }else{
+                        $.Func.pop(sign.statusmsg);
+                        $('#btnLine').removeClass('btnline-loading');
+                    }
                 });
             }
         },
         //调起支付
         onpay: function(sign){
-
+            var that = Action;
             wx.ready(function () {
                 function onBridgeReady() {
                     WeixinJSBridge.invoke(
@@ -273,7 +279,10 @@ define(function(require, exports, module) {
                         function (res) {
                             //支付成功
                             if (res.err_msg == 'get_brand_wcpay_request:ok') {
-                                location.href = 'pay_result.html?status=1&productid='+ goodsCache.productclass +'&money='+ totalPrice.toFixed(2);
+                                that.payCoupons(sign.orderid, function(){
+                                    var money = totalPrice.toFixed(2);
+                                    location.href = 'pay_result.html?status=1&productid='+ goodsCache.productclass +'&money='+ money;
+                                });
                             }else{
                                 //location.href = 'pay_result.html?status=0';
                             }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
@@ -294,6 +303,26 @@ define(function(require, exports, module) {
                 }
             });
         },
+        //支付成功后，获取优惠券
+        payCoupons: function(orderid, callback){
+            var that = this;
+            var param = {
+                "jsonrpc": "2.0",
+                "method": "Coupon.CouponOrderGift",
+                "id": 54321,
+                "params" : {
+                    "orderid":"C4107160422182761152",
+                    "channel":100
+                }
+            };
+            $.Func.ajax(param, function(res){
+                var result = res.result;
+                if(result){
+                    $.isFunction(callback) && callback(result);
+                }
+            })
+        },
+        //切换优惠券tab
         showTab: function(){
             var that = Action;
             var index = $(this).data('type') || 1;

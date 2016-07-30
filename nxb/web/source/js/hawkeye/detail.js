@@ -44,7 +44,6 @@ define(function(require, exports, module) {
             };
             $.Func.ajax(param, function(data){
                 var result = data.result;
-                console.log(result);
             })
         },
         renderList: function(){
@@ -52,7 +51,7 @@ define(function(require, exports, module) {
             this.getBlockStock(); //test
             if('block' === action){
                 this.getBlockStock();
-            }else if('block' === action){
+            }else if('industry' === action){
                 this.getIndustryStock();
             }
         },

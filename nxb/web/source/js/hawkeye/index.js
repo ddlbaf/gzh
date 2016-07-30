@@ -99,7 +99,7 @@ define(function(require, exports, module) {
             $('#noSubscribe img').each(function (i, t) {
                 var src = $(t).data('src');
                 $(t).attr('src', src);
-            })
+            });
             $('#nosubscribeBtn').html('<a href="../../pay/pay.html?productid=' + productid + '"><img src="../res/img/hawkeye/yybb_btn.png" width="100%" alt=""/></a>');
         },
         init : function(){

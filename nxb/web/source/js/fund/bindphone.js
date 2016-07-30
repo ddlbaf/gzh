@@ -95,9 +95,11 @@ define(function(require, exports, module) {
             }
 
         },
+        //点击右上角关闭按钮
         back: function(){
             history.go(-1);
         },
+        //关闭谈层
         closeLayer: function(){
             $('#layer').removeClass('show');
         },
@@ -105,6 +107,7 @@ define(function(require, exports, module) {
             var phone = Action.checkPhone();
             var target = $.Func.cookie.getCookie('gupiaoxianji_location');
             var url;
+            //判断入口
             switch (target){
                 case 'wallet':
                     url = $.CONFIG.CLUB;
@@ -113,8 +116,10 @@ define(function(require, exports, module) {
                     url = $.CONFIG.INDEX;
                     break;
             }
+            //查看验证码是否正确
             var smsCode = Action.checkSmsCode(phone, function(res){
 
+                //如果还没绑定微信APP，自动绑定
                 if(!$.User.wxapp){
                     $.Func.bindWeixin(phone, $.User.unionid, function(){});
                 }
@@ -123,11 +128,20 @@ define(function(require, exports, module) {
                     $.Func.bindGZH(phone, $.User.openid, function(res){
                         var result = res.result;
                         if(result){
-                            $.Func.pop(result.statusmsg, function(){
-                                if(result.status == 1){
+                            //成功后，两秒内跳转回去首页
+                            switch (result.status){
+                                case 1:
+                                    $('body').addClass('show-result');
+                                    setTimeout(function () {
+                                        location.href = url;
+                                    }, 2000);
+                                    break;
+                                case 2:
                                     location.href = url;
-                                }
-                            });
+                                    break;
+                                default:
+                                    $.Func.pop(result.statusmsg);
+                            }
                         }else{
                             $.Func.pop(res.error.message);
                         }

@@ -3,7 +3,7 @@
  */
 .index{}
 .index .nosubscribe{position: relative;}
-.index .nosubscribe .btn-line{padding: 0.9rem 1rem 0;height: 6rem;margin-top: -6rem;}
+.index .nosubscribe .btn-line{padding: 0.9rem 1rem 0;height: 6rem;margin-top: -6rem;background: #EB5C30;}
 .index .subscribe .section{background: #fff;padding: 0 1rem;margin-bottom: 1.5rem;}
 .index .subscribe .logo{margin:0 auto;padding-top: 0.5rem;height: 13.3rem;width: 21.8rem;margin-bottom: 1.7rem;background: url("../../img/hawkeye/yybb_icon_y.png") center bottom no-repeat;background-size: auto 13.3rem;text-align: center;color: #fff;font-size: 1.3rem;}
 .index .subscribe .logo-date{padding-top: 9.1rem;}

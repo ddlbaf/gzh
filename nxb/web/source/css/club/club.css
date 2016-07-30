@@ -17,7 +17,7 @@
 /* 尾盘捡钱包(wallet.html)
 ------------------------------ */
 .wallet{background: #fff;}
-.wallet .btnline{padding: 0 1rem;margin-top: -5rem;}
+.wallet .btnline{padding: 0 1rem;margin-top: -5rem;background: #4B76E5;}
 
 .wallet .subscribe .title{line-height: 4rem;font-size: 1.5rem;color: #202020;padding: 0 1rem;}
 .wallet .subscribe .recommend{line-height: 5rem;font-size: 1.4rem;padding: 0 1rem;}
