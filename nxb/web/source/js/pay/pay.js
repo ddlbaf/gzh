@@ -311,7 +311,7 @@ define(function(require, exports, module) {
                 "method": "Coupon.CouponOrderGift",
                 "id": 54321,
                 "params" : {
-                    "orderid":"C4107160422182761152",
+                    "orderid": orderid,
                     "channel":100
                 }
             };
