@@ -109,7 +109,7 @@ define(function(require, exports, module) {
             var url;
             //判断入口
             switch (target){
-                case 'wallet':
+                case 'club':
                     url = $.CONFIG.CLUB;
                     break;
                 case 'fund':
