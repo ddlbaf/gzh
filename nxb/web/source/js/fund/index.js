@@ -321,7 +321,6 @@ define(function(require, exports, module) {
             if(!$.User.wxgzh){
                 $.Func.showLayer('#popBindAccount');
             }
-	    $.Func.cookie.setCookie('gupiaoxianji_location', 'fund');
 
             //获取基金列表
             var fundlist = [];

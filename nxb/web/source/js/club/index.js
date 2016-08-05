@@ -75,7 +75,6 @@ define(function(require, exports, module) {
             }
 
             var uin = $.User.userid;
-            $.Func.cookie.setCookie('gupiaoxianji_location', 'wallet');
             that.checkSubscribe(uin);
             that.bindEvent();
         }

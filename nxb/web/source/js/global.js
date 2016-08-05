@@ -97,7 +97,8 @@ define(function(require, exports, module) {
                 wxgzh:  parseInt($.Func.cookie.getCookie('WXGzhBind')),
                 openid: $.Func.cookie.getCookie('openid'),
                 unionid: $.Func.cookie.getCookie('unionid'),
-                userid: $.Func.cookie.getCookie('userid')
+                userid: $.Func.cookie.getCookie('userid'),
+                entrance: $.Func.cookie.getCookie('entrance')
             };
         },
         //绑定公众号
@@ -194,12 +195,10 @@ define(function(require, exports, module) {
                     }
                 }
             });
-
-            $.Func.cookie.setCookie('gupiaoxianji_location', '');
         },
         //分享
         share: function () {
-            var target = $.Func.cookie.getCookie('gupiaoxianji_location');
+            var target = $.Func.cookie.getCookie('entrance');
             var url, defaultOpt;
 
             var onSuccess = function() {

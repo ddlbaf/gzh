@@ -105,7 +105,7 @@ define(function(require, exports, module) {
         },
         submit: function(){
             var phone = Action.checkPhone();
-            var target = $.Func.cookie.getCookie('gupiaoxianji_location');
+            var target = $.User.entrance;;
             var url;
             //判断入口
             switch (target){
@@ -170,9 +170,9 @@ define(function(require, exports, module) {
             Action.bindEvent();
 
             //如果是独立tab，就隐藏关闭按钮
-            var target = $.Func.cookie.getCookie('gupiaoxianji_location');
-            if(!target){
-                $('#back').addClass('hide');
+            var target = $.User.entrance;
+            if(target && target != 'bind'){
+                $('#back').removeClass('hide');
             }
 
 
