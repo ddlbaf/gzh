@@ -234,7 +234,8 @@ define(function(require, exports, module) {
                     "Pctchgtype" : 0,
                     "QueryType": queryType,
                     "StartDay": parseInt(sday),
-                    "EndDay": parseInt(eday)
+                    "EndDay": parseInt(eday),
+                    "QueryType": queryType
                 }
             };
             $.Func.ajax(param, function(res){
